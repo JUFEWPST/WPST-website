@@ -1,2 +1,0 @@
-# WPST-website
-WPST-website

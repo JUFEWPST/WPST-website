@@ -61,6 +61,7 @@ a {
 .logo {
   text-align: center;
   margin-bottom: 2rem;
+  position: relative;
 }
 
 .logo h1 {
@@ -68,6 +69,24 @@ a {
   letter-spacing: 0.5rem;
   font-weight: 700;
   animation: pulse 3s infinite alternate;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.original-logo {
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(68, 220, 158, 0.3);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  background-color: white;
+  padding: 10px;
+}
+
+.original-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(68, 220, 158, 0.5);
 }
 
 @keyframes pulse {
@@ -320,6 +339,10 @@ footer p {
     font-size: 3rem;
   }
 
+  .original-logo {
+    max-width: 200px;
+  }
+
   .section-title {
     font-size: 2rem;
   }
@@ -341,6 +364,10 @@ footer p {
 @media (max-width: 480px) {
   .logo h1 {
     font-size: 2.2rem;
+  }
+
+  .original-logo {
+    max-width: 150px;
   }
 
   .section-title {

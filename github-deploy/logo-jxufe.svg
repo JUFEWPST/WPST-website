@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <!-- 背景圆形 -->
+  <circle cx="250" cy="250" r="220" fill="#2d2937" />
+
+  <!-- 外圈螺旋 - Bond风格 -->
+  <circle cx="250" cy="250" r="200" fill="none" stroke="#44dc9e" stroke-width="4" stroke-dasharray="1256" stroke-dashoffset="0">
+    <animate attributeName="stroke-dashoffset" from="1256" to="0" dur="4s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- 内圈装饰线 -->
+  <circle cx="250" cy="250" r="180" fill="none" stroke="#44dc9e" stroke-width="1" opacity="0.5" />
+
+  <!-- 江财"J"字母风格化 -->
+  <path d="M180,150
+           L270,150
+           L270,170
+           L225,170
+           L225,280
+           Q225,310 195,310
+           L180,310
+           L180,290
+           L195,290
+           Q205,290 205,280
+           L205,170
+           L180,170
+           Z"
+        fill="#44dc9e" />
+
+  <!-- 财经"X"字母风格化 -->
+  <path d="M295,150
+           L325,150
+           L365,230
+           L365,150
+           L385,150
+           L385,310
+           L365,310
+           L325,230
+           L325,310
+           L305,310
+           Z"
+        fill="#5a79c0" />
+
+  <!-- 网络安全图形元素 - 盾牌 -->
+  <path d="M250,180
+           L320,210
+           Q320,280 290,320
+           Q250,350 210,320
+           Q180,280 180,210
+           Z"
+        fill="none"
+        stroke="#44dc9e"
+        stroke-width="2"
+        opacity="0.6" />
+
+  <!-- 网格与连接线 - 网络安全元素 -->
+  <g stroke="#44dc9e" stroke-width="1.5" opacity="0.7">
+    <line x1="210" y1="230" x2="290" y2="230" />
+    <line x1="210" y1="260" x2="290" y2="260" />
+    <line x1="210" y1="290" x2="290" y2="290" />
+    <line x1="230" y1="210" x2="230" y2="310" />
+    <line x1="250" y1="210" x2="250" y2="310" />
+    <line x1="270" y1="210" x2="270" y2="310" />
+
+    <!-- 数据节点 -->
+    <circle cx="230" cy="230" r="3" fill="#44dc9e" />
+    <circle cx="250" cy="230" r="3" fill="#44dc9e" />
+    <circle cx="270" cy="230" r="3" fill="#44dc9e" />
+    <circle cx="230" cy="260" r="3" fill="#44dc9e" />
+    <circle cx="250" cy="260" r="3" fill="#44dc9e" />
+    <circle cx="270" cy="260" r="3" fill="#44dc9e" />
+    <circle cx="230" cy="290" r="3" fill="#44dc9e" />
+    <circle cx="250" cy="290" r="3" fill="#44dc9e" />
+    <circle cx="270" cy="290" r="3" fill="#44dc9e" />
+  </g>
+
+  <!-- 锁定符号 - 安全标志 -->
+  <g transform="translate(250, 260) scale(0.6)">
+    <rect x="-20" y="-10" width="40" height="50" rx="5" fill="#5a79c0" opacity="0.9" />
+    <circle cx="0" cy="-25" r="15" fill="none" stroke="#5a79c0" stroke-width="6" opacity="0.9" />
+  </g>
+
+  <!-- 数字脉冲 - 底部动画 -->
+  <path d="M150,350 L170,350 L170,330 L190,330 L190,350 L210,350 L210,330 L230,330 L230,350 L250,350 L250,330 L270,330 L270,350 L290,350 L290,330 L310,330 L310,350 L330,350"
+        fill="none"
+        stroke="#44dc9e"
+        stroke-width="2"
+        stroke-dasharray="300"
+        stroke-dashoffset="300">
+    <animate attributeName="stroke-dashoffset" from="300" to="0" dur="2s" repeatCount="indefinite" />
+  </path>
+
+  <!-- 文字 -->
+  <text x="250" y="380" font-family="Montserrat, sans-serif" font-size="20" fill="#ffffff" text-anchor="middle" font-weight="bold">江西财经大学网安协会</text>
+</svg>
