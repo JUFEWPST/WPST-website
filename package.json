@@ -1,0 +1,19 @@
+{
+  "name": "wpst-website",
+  "version": "1.0.0",
+  "description": "江西财经大学网安协会官方网站",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^4.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "private": true
+}
