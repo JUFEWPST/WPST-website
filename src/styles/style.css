@@ -488,3 +488,53 @@ main {
   font-size: 0.9rem;
   padding: 0.6rem 1.2rem;
 }
+
+/* 导航图标样式 */
+.icon {
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--primary-green);
+  transition: all 0.3s ease;
+}
+
+/* 页面链接样式 */
+.page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 0.8rem;
+  background-color: rgba(68, 220, 158, 0.1);
+  transition: all 0.3s ease;
+  margin-left: 0.3rem;
+}
+
+.page-link:hover {
+  background-color: rgba(68, 220, 158, 0.2);
+  transform: scale(1.1);
+}
+
+.page-link:hover .icon {
+  transform: rotate(90deg);
+}
+
+.nav-menu li {
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .nav-menu li {
+    margin: 0.5rem 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .page-link {
+    margin-right: 1rem;
+  }
+}
