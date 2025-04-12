@@ -2,7 +2,8 @@ const sections = document.querySelectorAll('.section');
 const navLinks = document.querySelectorAll('.nav-menu .scroll-link');
 const navMenu = document.querySelector('.nav-menu');
 const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-const cyberButton = document.querySelector('.cyber-button');
+const cyberButton = document.querySelector('.cyber-button#aboutButton');
+const servicesButton = document.querySelector('.cyber-button#servicesButton');
 
 // Helper function to check if an element is in the viewport
 const isInViewport = (element: Element): boolean => {
@@ -34,23 +35,29 @@ const handleScroll = (): void => {
   }
 };
 
+// Scroll to section function
+const scrollToSection = (sectionId: string): void => {
+  const targetSection = document.getElementById(sectionId);
+  if (targetSection) {
+    targetSection.scrollIntoView({ behavior: 'smooth' });
+    
+    // Close mobile menu if open
+    if (navMenu && mobileNavToggle) {
+      navMenu.classList.remove('show');
+      mobileNavToggle.classList.remove('active');
+    }
+  }
+};
+
 // Handle smooth scrolling for navigation links
 for (const link of navLinks) {
   link.addEventListener('click', (e) => {
     e.preventDefault();
 
     const href = link.getAttribute('href');
-    if (href) {
-      const targetSection = document.querySelector(href);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-
-        // Close mobile menu after click
-        if (navMenu && mobileNavToggle) {
-          navMenu.classList.remove('show');
-          mobileNavToggle.classList.remove('active');
-        }
-      }
+    if (href && href.startsWith('#')) {
+      const sectionId = href.substring(1);
+      scrollToSection(sectionId);
     }
   });
 }
@@ -60,6 +67,19 @@ if (mobileNavToggle && navMenu) {
   mobileNavToggle.addEventListener('click', () => {
     navMenu.classList.toggle('show');
     mobileNavToggle.classList.toggle('active');
+  });
+}
+
+// Button event listeners
+if (cyberButton) {
+  cyberButton.addEventListener('click', () => {
+    scrollToSection('about');
+  });
+}
+
+if (servicesButton) {
+  servicesButton.addEventListener('click', () => {
+    scrollToSection('services');
   });
 }
 
@@ -173,16 +193,6 @@ const initParticles = (): void => {
     });
   }
 };
-
-// Cyber button event listener
-if (cyberButton) {
-  cyberButton.addEventListener('click', () => {
-    const teamSection = document.getElementById('team');
-    if (teamSection) {
-      teamSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-}
 
 // Initialize
 window.addEventListener('scroll', handleScroll);

@@ -27,6 +27,7 @@
       <nav>
         <ul class="nav-menu">
           <li><a href="index.html" class="active">首页</a></li>
+          <li><a href="#about" class="scroll-link">协会简介</a></li>
           <li><a href="#team" class="scroll-link">团队介绍</a><a href="team.html" class="page-link" title="打开单独页面"><i class="icon">⊕</i></a></li>
           <li><a href="#directions" class="scroll-link">方向分支</a><a href="directions.html" class="page-link" title="打开单独页面"><i class="icon">⊕</i></a></li>
           <li><a href="#honors" class="scroll-link">历史荣誉</a><a href="honors.html" class="page-link" title="打开单独页面"><i class="icon">⊕</i></a></li>
@@ -37,7 +38,7 @@
     </header>
 
     <main>
-      <section id="intro" class="section">
+      <section id="intro" class="section hero-section">
         <div class="security-circle"></div>
         <div class="ripple-container">
           <div class="ripple"></div>
@@ -51,12 +52,74 @@
             <h1 class="cyber-glitch" data-text="网安协会">网安协会</h1>
           </div>
           <h2 class="section-description">学习 · 创新 · 安全</h2>
-          <div class="cyber-button-container">
-            <button class="cyber-button">
-              <span class="cyber-button-text">探索安全世界</span>
-            </button>
+          <div class="hero-buttons">
+            <div class="cyber-button-container">
+              <button class="cyber-button" id="aboutButton">
+                <span class="cyber-button-text">探索协会</span>
+              </button>
+            </div>
+            <div class="cyber-button-container">
+              <button class="cyber-button secondary-button" id="servicesButton">
+                <span class="cyber-button-text">了解服务</span>
+              </button>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">2010</div>
+              <div class="stat-label">成立年份</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">200+</div>
+              <div class="stat-label">培养人才</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">获奖项目</div>
+            </div>
           </div>
           <p class="scroll-hint">向下滚动以探索更多</p>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <div class="section-content">
+          <div class="section-year">00</div>
+          <h2 class="section-title">协会简介</h2>
+          <div class="about-container">
+            <div class="about-image">
+              <img src="./assets/jxufe_logo.png" alt="江西财经大学网安协会团队照片" class="about-photo" />
+            </div>
+            <div class="about-text">
+              <p>江西财经大学网络安全协会（简称"网安协会"）成立于2010年，是一个专注于网络安全技术研究、知识分享与实践的学生组织。作为校内领先的技术社团，我们致力于提高校园网络安全意识，培养网络安全人才，并为学生提供学习和实践的平台。</p>
+              
+              <p>协会拥有完善的组织架构和专业的技术分支，定期举办网络安全讲座、技能培训、CTF竞赛等活动，为成员提供全方位的成长支持。我们鼓励成员积极参与各类网络安全竞赛，实践所学知识，培养团队合作精神。</p>
+              
+              <p>在数字化时代，网络安全的重要性日益凸显。我们期待更多对网络安全感兴趣的同学加入我们，共同学习、共同进步，为校园网络安全和国家网络安全事业贡献力量。</p>
+            </div>
+          </div>
+          <div class="feature-boxes">
+            <div class="feature-box">
+              <div class="feature-icon">🔍</div>
+              <h3 class="feature-title">技术研究</h3>
+              <p class="feature-desc">深入研究网络安全前沿技术，掌握实用安全工具</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon">🏆</div>
+              <h3 class="feature-title">竞赛培训</h3>
+              <p class="feature-desc">系统培训CTF技能，打造专业竞赛团队</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon">🔄</div>
+              <h3 class="feature-title">资源共享</h3>
+              <p class="feature-desc">分享优质学习资源，促进交流与合作</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon">🛡️</div>
+              <h3 class="feature-title">安全服务</h3>
+              <p class="feature-desc">提供校内安全咨询和技术支持服务</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -73,7 +136,7 @@
             </svg>
           </div>
           <p class="section-description">
-            江西财经大学网安协会成立于2010年，是一个专注于网络安全技术研究、知识分享与实践的学生组织。我们致力于提高校园网络安全意识，培养网络安全人才，并为学生提供学习和实践的平台。
+            网安协会设有主席团、技术部、宣传部、外联部等组织架构，拥有完善的管理制度和工作流程。团队成员来自不同学院和专业，共同构成了一个多元化、创新型的技术团队。
           </p>
           <a href="team.html" class="nav-button section-button">查看详情</a>
         </div>
@@ -160,8 +223,24 @@
     </main>
 
     <footer>
-      <p>© 2024 江西财经大学网安协会</p>
-      <p>联系我们: netsecu@jxufe.edu.cn</p>
+      <div class="footer-top">
+        <div class="footer-col">
+          <h3>关于我们</h3>
+          <p>江西财经大学网安协会<br>成立于2010年<br>专注网络安全技术研究与实践</p>
+        </div>
+        <div class="footer-col">
+          <h3>联系方式</h3>
+          <p>邮箱: netsecu@jxufe.edu.cn<br>QQ群: 123456789<br>地址: 江西省南昌市经济技术开发区</p>
+        </div>
+        <div class="footer-col">
+          <h3>合作单位</h3>
+          <p>江西财经大学信息管理学院<br>江西省网络安全协会<br>南昌市信息安全联盟</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 江西财经大学网安协会</p>
+        <p>备案号: 赣ICP备XXXXXXXX号</p>
+      </div>
     </footer>
   </div>
 
