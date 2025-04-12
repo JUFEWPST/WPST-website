@@ -12,6 +12,12 @@
 
 <body>
   <div id="root">
+    <div class="particles-container">
+      <div id="particles-js"></div>
+    </div>
+    
+    <div class="cyber-lines"></div>
+    
     <header>
       <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
         <span></span>
@@ -32,12 +38,24 @@
 
     <main>
       <section id="intro" class="section">
+        <div class="security-circle"></div>
+        <div class="ripple-container">
+          <div class="ripple"></div>
+          <div class="ripple"></div>
+          <div class="ripple"></div>
+        </div>
+        <div class="binary-overlay"></div>
         <div class="section-content">
           <div class="logo">
-            <img src="./assets/jxufe_logo.png" alt="江西财经大学网安协会标志" class="original-logo" />
-            <h1>网安协会</h1>
+            <img src="./assets/jxufe_logo.png" alt="江西财经大学网安协会标志" class="original-logo glow-effect" />
+            <h1 class="cyber-glitch" data-text="网安协会">网安协会</h1>
           </div>
           <h2 class="section-description">学习 · 创新 · 安全</h2>
+          <div class="cyber-button-container">
+            <button class="cyber-button">
+              <span class="cyber-button-text">探索安全世界</span>
+            </button>
+          </div>
           <p class="scroll-hint">向下滚动以探索更多</p>
         </div>
       </section>
@@ -147,6 +165,7 @@
     </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script type="module" src="./src/main.ts"></script>
 </body>
 

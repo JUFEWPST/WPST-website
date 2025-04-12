@@ -547,3 +547,306 @@ main {
     margin-right: 1rem;
   }
 }
+
+/* 高级网络安全视觉效果 */
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+}
+
+#particles-js {
+  width: 100%;
+  height: 100%;
+}
+
+/* 波纹效果 */
+.ripple-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(68, 220, 158, 0.5);
+  animation: ripple 8s linear infinite;
+  opacity: 0;
+}
+
+.ripple:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.ripple:nth-child(3) {
+  animation-delay: 4s;
+}
+
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    border-width: 3px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 90vw;
+    height: 90vw;
+    border-width: 1px;
+    opacity: 0;
+  }
+}
+
+/* 安全环 */
+.security-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top-color: var(--primary-green);
+  border-bottom-color: var(--primary-green);
+  opacity: 0.3;
+  animation: spin 5s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.security-circle::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-left-color: var(--accent-blue);
+  border-right-color: var(--accent-blue);
+  opacity: 0.5;
+  animation: spin 3s linear infinite reverse;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* 二进制背景覆盖 */
+.binary-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), 
+              url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='0' y='15' font-family='monospace' font-size='10' fill='%23ffffff10'%3E01001010110%3C/text%3E%3Ctext x='150' y='35' font-family='monospace' font-size='10' fill='%23ffffff10'%3E01010010%3C/text%3E%3Ctext x='300' y='55' font-family='monospace' font-size='10' fill='%23ffffff10'%3E01001%3C/text%3E%3Ctext x='20' y='75' font-family='monospace' font-size='10' fill='%23ffffff10'%3E010010101%3C/text%3E%3Ctext x='200' y='95' font-family='monospace' font-size='10' fill='%23ffffff10'%3E01001010%3C/text%3E%3Ctext x='100' y='115' font-family='monospace' font-size='10' fill='%23ffffff10'%3E0110001%3C/text%3E%3Ctext x='250' y='135' font-family='monospace' font-size='10' fill='%23ffffff10'%3E01010%3C/text%3E%3Ctext x='50' y='155' font-family='monospace' font-size='10' fill='%23ffffff10'%3E00101001%3C/text%3E%3Ctext x='180' y='175' font-family='monospace' font-size='10' fill='%23ffffff10'%3E01101010%3C/text%3E%3Ctext x='300' y='195' font-family='monospace' font-size='10' fill='%23ffffff10'%3E0110110%3C/text%3E%3C/svg%3E");
+  opacity: 0.2;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 网络线条 */
+.cyber-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(68, 220, 158, 0.05) 25%, rgba(68, 220, 158, 0.05) 26%, transparent 27%, transparent 74%, rgba(68, 220, 158, 0.05) 75%, rgba(68, 220, 158, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(68, 220, 158, 0.05) 25%, rgba(68, 220, 158, 0.05) 26%, transparent 27%, transparent 74%, rgba(68, 220, 158, 0.05) 75%, rgba(68, 220, 158, 0.05) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+/* 赛博朋克风格标题 */
+.cyber-glitch {
+  position: relative;
+  color: var(--text-color);
+  letter-spacing: 0.5rem;
+  font-weight: 700;
+  text-shadow: 
+    0 0 5px rgba(68, 220, 158, 0.8),
+    0 0 10px rgba(68, 220, 158, 0.4),
+    0 0 15px rgba(68, 220, 158, 0.2);
+  animation: cyber-glitch 3s infinite alternate;
+}
+
+.cyber-glitch::before,
+.cyber-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.cyber-glitch::before {
+  animation: glitch-effect 3s infinite alternate;
+  color: #00fffc;
+  left: 2px;
+}
+
+.cyber-glitch::after {
+  animation: glitch-effect 2s infinite alternate;
+  color: #ff00c1;
+  left: -2px;
+}
+
+@keyframes glitch-effect {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  1% {
+    opacity: 0.6;
+  }
+  2% {
+    opacity: 0.2;
+    transform: translateX(3px);
+  }
+  3% {
+    opacity: 0.4;
+    transform: translateX(-3px);
+  }
+  4% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cyber-glitch {
+  0% {
+    text-shadow: 
+      0 0 5px rgba(68, 220, 158, 0.8),
+      0 0 10px rgba(68, 220, 158, 0.4),
+      0 0 15px rgba(68, 220, 158, 0.2);
+  }
+  50% {
+    text-shadow: 
+      0 0 5px rgba(68, 220, 158, 0.8),
+      0 0 20px rgba(68, 220, 158, 0.6),
+      0 0 35px rgba(68, 220, 158, 0.4);
+  }
+  100% {
+    text-shadow: 
+      0 0 5px rgba(68, 220, 158, 0.8),
+      0 0 10px rgba(68, 220, 158, 0.4),
+      0 0 15px rgba(68, 220, 158, 0.2);
+  }
+}
+
+/* Logo 发光效果 */
+.glow-effect {
+  box-shadow: 
+    0 0 15px rgba(68, 220, 158, 0.6),
+    0 0 30px rgba(68, 220, 158, 0.4),
+    0 0 45px rgba(68, 220, 158, 0.2);
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 
+      0 0 15px rgba(68, 220, 158, 0.6),
+      0 0 30px rgba(68, 220, 158, 0.4),
+      0 0 45px rgba(68, 220, 158, 0.2);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px rgba(68, 220, 158, 0.8),
+      0 0 40px rgba(68, 220, 158, 0.6),
+      0 0 60px rgba(68, 220, 158, 0.4);
+  }
+}
+
+/* 赛博风格按钮 */
+.cyber-button-container {
+  margin-top: 2rem;
+  perspective: 500px;
+}
+
+.cyber-button {
+  position: relative;
+  background: var(--primary-dark);
+  border: 2px solid var(--primary-green);
+  color: var(--primary-green);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: rgba(68, 220, 158, 0.1);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
+  z-index: -1;
+}
+
+.cyber-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(68, 220, 158, 0.4), transparent);
+  transition: 0.5s;
+}
+
+.cyber-button:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 
+    0 5px 15px rgba(68, 220, 158, 0.4),
+    0 0 30px rgba(68, 220, 158, 0.2);
+}
+
+.cyber-button:hover::after {
+  left: 100%;
+}
+
+.cyber-button-text {
+  position: relative;
+  z-index: 1;
+}
