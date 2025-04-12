@@ -257,6 +257,15 @@ a {
   transition: stroke 0.3s ease;
 }
 
+/* 为方向分支页面添加特殊样式 */
+#directions .illustration svg {
+  filter: drop-shadow(0 0 8px rgba(45, 41, 55, 0.8));
+}
+
+#directions .illustration:hover svg {
+  filter: drop-shadow(0 0 12px rgba(45, 41, 55, 1));
+}
+
 .illustration:hover svg path,
 .illustration:hover svg line,
 .illustration:hover svg polygon,
