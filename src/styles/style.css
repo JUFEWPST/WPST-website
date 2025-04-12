@@ -24,6 +24,18 @@ html, body {
   background-color: var(--primary-dark);
   color: var(--text-color);
   overflow-x: hidden;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 a {
@@ -373,6 +385,15 @@ footer p {
   .illustration {
     max-width: 90%;
   }
+
+  .nav-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-button {
+    width: 80%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -397,4 +418,37 @@ footer p {
 /* 为主体内容添加上边距，避免被固定导航栏遮挡 */
 main {
   padding-top: 3rem;
+}
+
+/* 导航按钮样式 */
+.nav-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.nav-button {
+  display: inline-block;
+  background-color: var(--primary-green);
+  color: var(--primary-dark);
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 10px rgba(68, 220, 158, 0.3);
+}
+
+.nav-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(68, 220, 158, 0.5);
+  background-color: #50e5a8;
+}
+
+.nav-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(68, 220, 158, 0.3);
 }
