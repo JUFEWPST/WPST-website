@@ -131,6 +131,25 @@ a {
 
 .nav-menu li {
   margin: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu .scroll-link {
+  margin-right: 0.3rem;
+}
+
+.nav-menu .page-link {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  opacity: 0.6;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-menu .page-link:hover {
+  background-color: rgba(68, 220, 158, 0.2);
+  opacity: 1;
 }
 
 .nav-menu a {
@@ -394,6 +413,16 @@ footer p {
   .nav-button {
     width: 80%;
   }
+
+  .nav-menu li {
+    margin: 0.5rem 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .nav-menu .page-link {
+    margin-right: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -451,4 +480,11 @@ main {
 .nav-button:active {
   transform: translateY(1px);
   box-shadow: 0 2px 5px rgba(68, 220, 158, 0.3);
+}
+
+/* 详情按钮样式 */
+.section-button {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.2rem;
 }

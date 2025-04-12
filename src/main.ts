@@ -1,5 +1,5 @@
 const sections = document.querySelectorAll('.section');
-const navLinks = document.querySelectorAll('.nav-menu a');
+const navLinks = document.querySelectorAll('.nav-menu .scroll-link');
 const navMenu = document.querySelector('.nav-menu');
 const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
 
