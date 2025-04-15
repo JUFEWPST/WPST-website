@@ -1404,50 +1404,24 @@ footer {
 .terminal-text {
   position: relative;
   width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
+  max-width: 100%;
+  margin: 0;
   padding: 15px;
   background-color: rgba(0, 8, 12, 0.8);
   color: var(--terminal-green);
   font-family: 'Fira Code', monospace;
   font-size: 14px;
   line-height: 1.6;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 200, 120, 0.3);
-  box-shadow: 0 0 15px rgba(0, 255, 120, 0.1);
-  max-height: 80vh;
+  border-radius: 3px;
+  border: none; /* 移除边框，因为已经在container上有边框 */
+  box-shadow: none; /* 移除阴影，因为已经在container上有阴影 */
+  max-height: 300px; /* 限制最大高度 */
   overflow-y: auto;
-  z-index: 10;
+  z-index: 20;
   text-align: left;
 }
 
-.terminal-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid rgba(0, 200, 120, 0.3);
-}
-
-.term-dot {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-
-.term-dot.red { background-color: #ff5f56; }
-.term-dot.yellow { background-color: #ffbd2e; }
-.term-dot.green { background-color: #27c93f; }
-
-.term-title {
-  margin-left: 10px;
-  font-size: 12px;
-  color: var(--terminal-green);
-  opacity: 0.8;
-}
-
+/* 确保终端内容可见且位置正确 */
 .terminal-content {
   padding: 5px 0;
 }
@@ -1456,55 +1430,80 @@ footer {
   margin: 0;
   padding: 3px 0;
   line-height: 1.5;
+  font-size: 13px;
+  color: var(--primary-green);
+  text-shadow: 0 0 2px rgba(65, 255, 138, 0.5);
+  white-space: pre-wrap; /* 保持正确的空格和换行 */
+  word-break: break-word;
 }
 
+/* 添加滚动条样式 */
+.terminal-text::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-text::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.terminal-text::-webkit-scrollbar-thumb {
+  background: var(--primary-green);
+  border-radius: 3px;
+}
+
+/* 增加终端标题栏的对比度 */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 200, 120, 0.3);
+  background-color: rgba(0, 10, 15, 0.7); /* 略深的背景 */
+  padding: 5px;
+  border-radius: 3px 3px 0 0;
+}
+
+/* 确保输入提示符颜色正确 */
 .terminal-chevron {
-  color: var(--accent-blue);
+  color: var(--primary-green);
   margin-right: 8px;
   font-weight: bold;
 }
 
-/* 确保终端文本中的打字效果正确显示 */
-#terminalDisplay {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
-  z-index: 20;
-}
-
-/* 修复红框区域的样式 */
+/* 修复终端容器的位置和样式 */
 .terminal-container {
   position: relative;
-  width: 90%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
+  width: 80%; /* 调整宽度 */
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 0; /* 移除内边距 */
   background-color: rgba(0, 8, 12, 0.9);
   border: 1px solid var(--primary-green);
-  border-radius: 4px;
+  border-radius: 5px;
   box-shadow: 0 0 20px rgba(0, 255, 120, 0.2);
   z-index: 20;
   overflow: hidden;
-  margin-bottom: 20px;
 }
 
-/* 调整移动设备的响应式样式 */
-@media (max-width: 768px) {
-  .terminal-text {
-    font-size: 12px;
-    padding: 10px;
-    margin: 15px auto;
-  }
-  
-  .term-dot {
-    width: 8px;
-    height: 8px;
-  }
-  
-  .terminal-content p {
-    padding: 2px 0;
-  }
+/* 删除任何可能干扰的扫描效果 */
+.scanning-effect, .cyber-lines, .cyber-grid, .scan-line {
+  display: none !important;
+}
+
+/* 为页面底部标签添加显示效果 */
+.site-tag {
+  margin: 0;
+  padding: 8px 15px;
+  background-color: rgba(0, 20, 30, 0.7);
+  color: var(--primary-green);
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 200, 120, 0.3);
+  display: inline-block;
+  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 120, 0.1);
+  text-align: center;
 }
 
 .security-badge {
@@ -1848,115 +1847,17 @@ h2.section-title, h3.feature-title {
 
 /* 高级数据扫描线 */
 .scan-line {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px; /* 稍微增加厚度 */
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 204, 255, 0.2) 20%,
-    rgba(0, 204, 255, 0.8) 50%,
-    rgba(0, 204, 255, 0.2) 80%,
-    transparent 100%
-  );
-  box-shadow: 
-    0 0 5px rgba(0, 204, 255, 0.5),
-    0 0 10px rgba(0, 204, 255, 0.3),
-    0 0 15px rgba(0, 204, 255, 0.1);
-  z-index: 100;
-  pointer-events: none;
-  animation: scanLine 6s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
-  opacity: 0.7;
-}
-
-@keyframes scanLine {
-  0% {
-    top: -5%;
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.8;
-  }
-  100% {
-    top: 105%;
-    opacity: 0;
-  }
+  display: none;
 }
 
 /* 增强网格背景效果 */
 .cyber-lines {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(0, 204, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 204, 255, 0.05) 1px, transparent 1px),
-    radial-gradient(circle at 50% 50%, rgba(65, 255, 138, 0.03) 0%, transparent 60%);
-  background-size: 30px 30px, 30px 30px, 100% 100%;
-  background-position: center center;
-  pointer-events: none;
-  z-index: -2;
-  animation: gridPulse 8s infinite alternate;
-}
-
-@keyframes gridPulse {
-  0% {
-    background-size: 30px 30px, 30px 30px, 100% 100%;
-    opacity: 0.5;
-  }
-  100% {
-    background-size: 32px 32px, 32px 32px, 120% 120%;
-    opacity: 0.7;
-  }
+  display: none;
 }
 
 /* 立体网格线效果 - 添加额外的深度网格 */
 .cyber-grid {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(65, 255, 138, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(65, 255, 138, 0.03) 1px, transparent 1px),
-    linear-gradient(rgba(0, 204, 255, 0.02) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(0, 204, 255, 0.02) 2px, transparent 2px);
-  background-size: 
-    20px 20px, 
-    20px 20px,
-    100px 100px,
-    100px 100px;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.6;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  animation: gridFloat 20s infinite linear;
-}
-
-@keyframes gridFloat {
-  0% {
-    background-position: 
-      0 0,
-      0 0,
-      0 0,
-      0 0;
-  }
-  100% {
-    background-position: 
-      20px 20px,
-      20px 20px,
-      100px 100px,
-      100px 100px;
-  }
+  display: none;
 }
 
 /* 脉冲辉光效果用于强调元素 */
@@ -2418,6 +2319,154 @@ main {
   /* 优化矩阵雨效果在移动端的显示 */
   .matrix-rain, .binary-stream {
     opacity: 0.4; /* 降低移动设备上的不透明度以提高文本可读性 */
+  }
+}
+
+/* 修复标签容器的位置 */
+.site-tag-container {
+  width: 80%;
+  max-width: 700px;
+  margin: 10px auto;
+  text-align: center;
+  z-index: 20;
+  position: relative;
+}
+
+.site-tag {
+  margin: 0;
+  padding: 8px 15px;
+  background-color: rgba(0, 10, 15, 0.7);
+  color: var(--primary-green);
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 200, 120, 0.3);
+  display: inline-block;
+  box-shadow: 0 0 10px rgba(0, 255, 120, 0.1);
+  text-align: center;
+  width: 100%;
+}
+
+/* 修复终端容器样式 */
+.terminal-container {
+  position: relative;
+  width: 80%;
+  max-width: 700px;
+  margin: 30px auto 10px;
+  padding: 0;
+  background-color: rgba(0, 8, 12, 0.9);
+  border: 1px solid var(--primary-green);
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 255, 120, 0.2);
+  z-index: 20;
+  overflow: hidden;
+}
+
+/* 修复终端头部样式 */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 200, 120, 0.3);
+  background-color: rgba(0, 10, 15, 0.7);
+  border-radius: 4px 4px 0 0;
+}
+
+.term-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.term-dot.red { background-color: #ff5f56; }
+.term-dot.yellow { background-color: #ffbd2e; }
+.term-dot.green { background-color: #27c93f; }
+
+.term-title {
+  margin-left: 10px;
+  font-size: 12px;
+  color: var(--primary-green);
+  opacity: 0.8;
+}
+
+/* 确保闪烁光标可见 */
+.terminal-content p:last-child .terminal-chevron::after {
+  content: '█';
+  display: inline-block;
+  margin-left: 2px;
+  font-size: 14px;
+  animation: cursor-blink 1s step-end infinite;
+  color: var(--primary-green);
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 调整光标提示符颜色和样式 */
+.terminal-chevron {
+  color: var(--primary-green);
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+/* 重新定义终端内容区域大小，使它适合图片中的显示 */
+.terminal-content {
+  padding: 10px;
+  min-height: 30px;
+}
+
+.terminal-content p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-size: 14px;
+  color: var(--primary-green);
+  text-shadow: 0 0 2px rgba(65, 255, 138, 0.5);
+}
+
+/* 修复响应式样式 */
+@media (max-width: 768px) {
+  .terminal-container, .site-tag-container {
+    width: 90%;
+  }
+  
+  .terminal-header {
+    padding: 8px;
+  }
+  
+  .terminal-content {
+    min-height: 25px;
+    padding: 8px;
+  }
+  
+  .term-dot {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .site-tag {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-container, .site-tag-container {
+    width: 95%;
+  }
+  
+  .terminal-content p {
+    font-size: 12px;
+  }
+  
+  .site-tag {
+    font-size: 11px;
+    padding: 5px 8px;
   }
 }
 

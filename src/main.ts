@@ -283,42 +283,54 @@ const initTypewriterEffect = (): void => {
   const terminalContent = document.querySelector('.terminal-content');
   if (!terminalContent) return;
   
-  // 保存原始HTML内容
-  const originalContent = terminalContent.innerHTML;
+  // 清空内容，只保留光标行
+  terminalContent.innerHTML = '<p><span class="terminal-chevron">&gt;</span> <span class="cursor"></span></p>';
   
-  // 清空容器，只保留第一行
-  const firstLine = terminalContent.querySelector('p');
-  terminalContent.innerHTML = '';
-  if (firstLine) {
-    terminalContent.appendChild(firstLine.cloneNode(true));
-  }
+  // 需要展示的命令和结果
+  const commands = [
+    { text: 'echo "专注于网络安全教育、技术研究与实践的学生社团"', delay: 100 }
+  ];
   
-  // 从HTML解析出所有行
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = originalContent;
-  const lines = tempDiv.querySelectorAll('p');
+  let currentCommandIndex = 0;
+  let currentCharIndex = 0;
   
-  // 动态添加每一行
-  let lineIndex = 0;
-  
-  const typeLine = () => {
-    if (lineIndex < lines.length) {
-      // 跳过第一行，因为已经添加了
-      if (lineIndex > 0 || !firstLine) {
-        const line = lines[lineIndex];
-        terminalContent.appendChild(line.cloneNode(true));
-        
-        // 滚动到底部
-        terminalContent.scrollTop = terminalContent.scrollHeight;
-      }
+  const typeCommand = () => {
+    const command = commands[currentCommandIndex];
+    const currentLine = terminalContent.querySelector('p:last-child');
+    
+    if (!currentLine) return; // 确保行元素存在
+    
+    if (currentCharIndex < command.text.length) {
+      // 获取当前光标位置元素
+      const cursorElement = currentLine.querySelector('.cursor');
       
-      lineIndex++;
-      setTimeout(typeLine, Math.random() * 150 + 100);
+      if (!cursorElement) return; // 确保光标元素存在
+      
+      // 添加下一个字符
+      cursorElement.textContent = command.text.substring(0, currentCharIndex + 1);
+      
+      // 继续下一个字符
+      currentCharIndex++;
+      setTimeout(typeCommand, Math.random() * 50 + 50);
+    } else {
+      // 命令输入完成
+      const commandElement = terminalContent.querySelector('p:last-child');
+      
+      if (!commandElement) return; // 确保命令元素存在
+      
+      commandElement.innerHTML = `<span class="terminal-chevron">&gt;</span> ${command.text}`;
+      
+      // 添加下一行光标
+      setTimeout(() => {
+        const newLine = document.createElement('p');
+        newLine.innerHTML = '<span class="terminal-chevron">&gt;</span> <span class="cursor"></span>';
+        terminalContent.appendChild(newLine);
+      }, 500);
     }
   };
   
-  // 开始打字效果
-  setTimeout(typeLine, 500);
+  // 开始输入第一个命令
+  setTimeout(typeCommand, 1000);
 };
 
 // Initialize particles.js
