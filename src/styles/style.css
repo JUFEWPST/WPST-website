@@ -1558,6 +1558,72 @@ footer {
   z-index: 1;  /* 提高z-index确保可见性 */
   opacity: 0.8;  /* 提高不透明度 */
   mix-blend-mode: screen;
+  transition: opacity 0.5s ease;
+}
+
+/* 当页面滚动超过首屏高度时隐藏 */
+.matrix-rain.hidden {
+  opacity: 0;
+}
+
+/* 二进制流效果控制 */
+.binary-stream {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;  /* 提高z-index值 */
+  overflow: hidden;
+  opacity: 0.4;  /* 提高不透明度 */
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+/* 当页面滚动超过首屏高度时隐藏 */
+.binary-stream.hidden {
+  opacity: 0;
+}
+
+/* 回到顶部按钮 */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-green);
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(0, 255, 120, 0.3);
+  transform: translateY(20px);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background-color: rgba(0, 20, 10, 0.8);
+  box-shadow: 0 0 15px rgba(0, 255, 120, 0.5);
+}
+
+.back-to-top::before {
+  content: "↑";
+  font-family: Arial, sans-serif;
+  font-weight: bold;
 }
 
 /* 响应式调整 */
@@ -1569,6 +1635,14 @@ footer {
   .terminal-text {
     font-size: 12px;
     padding: 10px;
+  }
+  
+  .back-to-top {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    bottom: 15px;
+    right: 15px;
   }
 }
 
@@ -2035,19 +2109,34 @@ h2.section-title, h3.feature-title {
 
 /* 固定导航栏样式 */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  background-color: rgba(0, 10, 15, 0.85);
+  backdrop-filter: blur(5px);
   z-index: 1000;
-  background-color: rgba(0, 15, 20, 0.85);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 20px rgba(65, 255, 138, 0.2);
-  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.15);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;
+}
+
+.nav-hidden {
+  transform: translateY(-100%);
+}
+
+.nav-visible {
+  transform: translateY(0);
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;
+  gap: 1rem;
 }
 
 .logo {
@@ -2067,11 +2156,6 @@ header {
 .logo-icon {
   color: var(--primary-color);
   font-weight: bold;
-}
-
-.main-nav {
-  display: flex;
-  gap: 1.5rem;
 }
 
 .nav-button {

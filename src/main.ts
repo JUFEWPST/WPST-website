@@ -53,12 +53,49 @@ const handleNavVisibility = (): void => {
   lastScrollTop = currentScrollTop;
 };
 
+// 控制Matrix Rain和二进制流的显示隐藏
+const handleMatrixVisibility = (): void => {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const matrixRainElement = document.querySelector('.matrix-rain');
+  const binaryStreamElement = document.querySelector('.binary-stream');
+  const windowHeight = window.innerHeight;
+  
+  // 当滚动超过一屏高度时，隐藏Matrix Rain和二进制流
+  if (scrollTop > windowHeight * 0.8) {
+    matrixRainElement?.classList.add('hidden');
+    binaryStreamElement?.classList.add('hidden');
+  } else {
+    matrixRainElement?.classList.remove('hidden');
+    binaryStreamElement?.classList.remove('hidden');
+  }
+};
+
+// 处理回到顶部按钮的显示和隐藏
+const handleBackToTopVisibility = (): void => {
+  const backToTopButton = document.getElementById('backToTop');
+  if (!backToTopButton) return;
+  
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  
+  if (scrollTop > 300) {
+    backToTopButton.classList.add('visible');
+  } else {
+    backToTopButton.classList.remove('visible');
+  }
+};
+
 // Activate navigation based on scroll position
 const handleScroll = (): void => {
   if (!ticking) {
     window.requestAnimationFrame(() => {
       // 处理导航栏可见性
       handleNavVisibility();
+      
+      // 处理Matrix Rain和二进制流的可见性
+      handleMatrixVisibility();
+      
+      // 处理回到顶部按钮可见性
+      handleBackToTopVisibility();
       
       // 处理section可见性和导航激活
       for (const section of sections) {
@@ -383,6 +420,19 @@ const addConsoleBanner = (): void => {
   console.log('%c江西财经大学网安协会 - 学习 · 创新 · 安全', 'color: #41ff8a; font-size: 14px;');
 };
 
+// 设置回到顶部按钮功能
+const setupBackToTop = () => {
+  const backToTopButton = document.getElementById('backToTop');
+  if (!backToTopButton) return;
+  
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+};
+
 // Initialize
 window.addEventListener('scroll', handleScroll);
 window.addEventListener('resize', () => {
@@ -413,6 +463,9 @@ window.addEventListener('load', () => {
   // 设置导航链接点击事件
   setupNavLinkClick();
   
+  // 设置回到顶部按钮
+  setupBackToTop();
+  
   // 每隔一段时间更新二进制流
   setInterval(() => {
     createBinaryStreams();
@@ -424,6 +477,6 @@ window.addEventListener('load', () => {
     introSection.classList.add('section-visible');
   }
 
-  // Check other sections
+  // 初始处理滚动事件
   handleScroll();
 });
