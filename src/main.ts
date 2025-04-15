@@ -1,15 +1,21 @@
 const sections = document.querySelectorAll('.section');
 const navLinks = document.querySelectorAll('.nav-menu .scroll-link');
 const navMenu = document.querySelector('.nav-menu');
-const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+const mobileNavToggle = document.querySelector('.mobile-menu-toggle');
 const cyberButton = document.querySelector('.cyber-button#aboutButton');
 const servicesButton = document.querySelector('.cyber-button#servicesButton');
 const matrixCanvas = document.getElementById('matrixRain') as HTMLCanvasElement;
+const header = document.querySelector('header');
 
 // 导入视觉效果模块
 import { registerEffects } from './effects';
 // 导入黑客帝国风格效果
 import { MatrixRain, createBinaryStreams, createHexDisplay, createPortScan, createIntrusionWarning } from './matrixRain';
+
+// 滚动相关变量
+let lastScrollTop = 0;
+let scrollThreshold = 10; // 滚动阈值
+let ticking = false;
 
 // Helper function to check if an element is in the viewport
 const isInViewport = (element: Element): boolean => {
@@ -20,38 +26,106 @@ const isInViewport = (element: Element): boolean => {
   );
 };
 
+// 控制导航栏的显示和隐藏
+const handleNavVisibility = (): void => {
+  if (!header) return;
+  
+  const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
+  
+  // 如果在页面顶部，始终显示导航栏
+  if (currentScrollTop <= 10) {
+    header.classList.remove('nav-hidden');
+    header.classList.add('nav-visible');
+    return;
+  }
+  
+  // 向下滚动隐藏，向上滚动显示
+  if (currentScrollTop > lastScrollTop && currentScrollTop > scrollThreshold) {
+    // 向下滚动
+    header.classList.remove('nav-visible');
+    header.classList.add('nav-hidden');
+  } else {
+    // 向上滚动
+    header.classList.remove('nav-hidden');
+    header.classList.add('nav-visible');
+  }
+  
+  lastScrollTop = currentScrollTop;
+};
+
 // Activate navigation based on scroll position
 const handleScroll = (): void => {
-  for (const section of sections) {
-    if (isInViewport(section)) {
-      const id = section.getAttribute('id');
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      // 处理导航栏可见性
+      handleNavVisibility();
+      
+      // 处理section可见性和导航激活
+      for (const section of sections) {
+        if (isInViewport(section)) {
+          const id = section.getAttribute('id');
 
-      // Update active navigation item
-      for (const link of navLinks) {
-        if (link.getAttribute('href') === `#${id}`) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
+          // Update active navigation item
+          for (const link of navLinks) {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          }
+
+          // Add animation class to visible sections
+          section.classList.add('section-visible');
         }
       }
-
-      // Add animation class to visible sections
-      section.classList.add('section-visible');
-    }
+      
+      ticking = false;
+    });
+    
+    ticking = true;
   }
+};
+
+// Mobile menu toggle
+if (mobileNavToggle) {
+  mobileNavToggle.addEventListener('click', () => {
+    const mainNav = document.querySelector('.main-nav');
+    if (mainNav) {
+      mainNav.classList.toggle('show');
+    }
+    mobileNavToggle.classList.toggle('active');
+  });
+}
+
+// 点击导航链接时关闭移动菜单
+const setupNavLinkClick = () => {
+  const navButtons = document.querySelectorAll('.nav-button');
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const mainNav = document.querySelector('.main-nav');
+      if (window.innerWidth <= 768 && mainNav && mainNav.classList.contains('show')) {
+        mainNav.classList.remove('show');
+        if (mobileNavToggle) {
+          mobileNavToggle.classList.remove('active');
+        }
+      }
+    });
+  });
 };
 
 // Scroll to section function
 const scrollToSection = (sectionId: string): void => {
   const targetSection = document.getElementById(sectionId);
   if (targetSection) {
-    targetSection.scrollIntoView({ behavior: 'smooth' });
+    // 考虑固定头部的高度
+    const headerElement = document.querySelector('header');
+    const yOffset = headerElement ? -headerElement.offsetHeight : 0;
+    const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
     
-    // Close mobile menu if open
-    if (navMenu && mobileNavToggle) {
-      navMenu.classList.remove('show');
-      mobileNavToggle.classList.remove('active');
-    }
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
   }
 };
 
@@ -65,14 +139,6 @@ for (const link of navLinks) {
       const sectionId = href.substring(1);
       scrollToSection(sectionId);
     }
-  });
-}
-
-// Mobile menu toggle
-if (mobileNavToggle && navMenu) {
-  mobileNavToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
-    mobileNavToggle.classList.toggle('active');
   });
 }
 
@@ -91,26 +157,39 @@ if (servicesButton) {
 
 // Matrix Rain Effect
 const initMatrixRain = (): void => {
-  if (!matrixCanvas) return;
+  const matrixCanvas = document.getElementById('matrixRain') as HTMLCanvasElement;
+  if (!matrixCanvas || !(matrixCanvas instanceof HTMLCanvasElement)) {
+    console.error('Matrix rain canvas element not found or is not a canvas');
+    return;
+  }
   
-  // 使用升级版的黑客帝国风格矩阵雨
-  const matrixRain = new MatrixRain('matrixRain', 'binary');
-  matrixRain.start();
+  // 确保canvas元素可见且具有正确的尺寸
+  matrixCanvas.style.display = 'block';
+  matrixCanvas.width = window.innerWidth;
+  matrixCanvas.height = window.innerHeight;
   
-  // 创建二进制流效果
-  createBinaryStreams();
-  
-  // 创建十六进制数据显示
-  createHexDisplay();
-  
-  // 创建端口扫描模拟
-  createPortScan();
-  
-  // 随机显示入侵警告
-  if (Math.random() > 0.7) {
-    setTimeout(() => {
-      createIntrusionWarning();
-    }, 5000);
+  try {
+    // 使用升级版的黑客帝国风格矩阵雨
+    const matrixRain = new MatrixRain('matrixRain', 'binary');
+    matrixRain.start();
+    
+    // 创建二进制流效果
+    createBinaryStreams();
+    
+    // 创建十六进制数据显示
+    createHexDisplay();
+    
+    // 创建端口扫描模拟
+    createPortScan();
+    
+    // 随机显示入侵警告
+    if (Math.random() > 0.7) {
+      setTimeout(() => {
+        createIntrusionWarning();
+      }, 5000);
+    }
+  } catch (error) {
+    console.error('Error initializing matrix rain effects:', error);
   }
 };
 
@@ -306,7 +385,18 @@ const addConsoleBanner = (): void => {
 
 // Initialize
 window.addEventListener('scroll', handleScroll);
-window.addEventListener('resize', handleScroll);
+window.addEventListener('resize', () => {
+  handleScroll();
+  
+  // 在调整窗口大小时重新检查移动菜单
+  const mainNav = document.querySelector('.main-nav');
+  if (window.innerWidth > 768 && mainNav) {
+    mainNav.classList.remove('show');
+    if (mobileNavToggle) {
+      mobileNavToggle.classList.remove('active');
+    }
+  }
+});
 
 // Trigger scroll handler on page load
 window.addEventListener('load', () => {
@@ -319,6 +409,9 @@ window.addEventListener('load', () => {
   
   // 初始化赛博朋克视觉效果
   registerEffects();
+  
+  // 设置导航链接点击事件
+  setupNavLinkClick();
   
   // 每隔一段时间更新二进制流
   setInterval(() => {
