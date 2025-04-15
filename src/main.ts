@@ -4,6 +4,10 @@ const navMenu = document.querySelector('.nav-menu');
 const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
 const cyberButton = document.querySelector('.cyber-button#aboutButton');
 const servicesButton = document.querySelector('.cyber-button#servicesButton');
+const matrixCanvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
+
+// 导入视觉效果模块
+import { registerEffects } from './effects';
 
 // Helper function to check if an element is in the viewport
 const isInViewport = (element: Element): boolean => {
@@ -83,6 +87,147 @@ if (servicesButton) {
   });
 }
 
+// Matrix Rain Effect
+const initMatrixRain = (): void => {
+  if (!matrixCanvas) return;
+  
+  const ctx = matrixCanvas.getContext('2d');
+  if (!ctx) return;
+  
+  // Make canvas full screen
+  matrixCanvas.width = window.innerWidth;
+  matrixCanvas.height = window.innerHeight;
+  
+  // Characters to use
+  const chars = '01ABCDEF'.split('');
+  
+  // Font size
+  const fontSize = 14;
+  
+  // Number of columns
+  const columns = Math.floor(matrixCanvas.width / fontSize);
+  
+  // Array to track the y position of each column
+  const drops: number[] = [];
+  
+  // Initialize drops
+  for (let i = 0; i < columns; i++) {
+    drops[i] = Math.random() * -100;
+  }
+  
+  // Draw function
+  const draw = () => {
+    // Semi-transparent black background for trail effect
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+    
+    // Green text
+    ctx.fillStyle = '#0cf';
+    ctx.font = `${fontSize}px monospace`;
+    
+    // Draw drops
+    for (let i = 0; i < drops.length; i++) {
+      // Random character
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      
+      // Draw character
+      ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+      
+      // If it's reached the bottom or random chance, reset
+      if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      
+      // Move drop down
+      drops[i]++;
+    }
+  };
+  
+  // Run the animation
+  setInterval(draw, 40);
+  
+  // Resize canvas on window resize
+  window.addEventListener('resize', () => {
+    matrixCanvas.width = window.innerWidth;
+    matrixCanvas.height = window.innerHeight;
+  });
+};
+
+// Counter Animation for Stats
+const animateCounters = (): void => {
+  const yearCounter = document.getElementById('stat-year');
+  const membersCounter = document.getElementById('stat-members');
+  const awardsCounter = document.getElementById('stat-awards');
+  
+  if (yearCounter) {
+    const targetYear = 2024;
+    let currentYear = 2010;
+    const yearInterval = setInterval(() => {
+      yearCounter.textContent = String(currentYear);
+      currentYear++;
+      if (currentYear > targetYear) {
+        clearInterval(yearInterval);
+      }
+    }, 80);
+  }
+  
+  if (membersCounter) {
+    const targetMembers = 200;
+    let currentMembers = 0;
+    const membersInterval = setInterval(() => {
+      membersCounter.textContent = `${currentMembers}+`;
+      currentMembers += 5;
+      if (currentMembers > targetMembers) {
+        clearInterval(membersInterval);
+      }
+    }, 40);
+  }
+  
+  if (awardsCounter) {
+    const targetAwards = 50;
+    let currentAwards = 0;
+    const awardsInterval = setInterval(() => {
+      awardsCounter.textContent = `${currentAwards}+`;
+      currentAwards += 1;
+      if (currentAwards > targetAwards) {
+        clearInterval(awardsInterval);
+      }
+    }, 60);
+  }
+};
+
+// Typewriter effect for terminal text
+const initTypewriterEffect = (): void => {
+  const terminalTexts = document.querySelectorAll('.terminal-text');
+  
+  terminalTexts.forEach((terminalText) => {
+    const originalText = terminalText.textContent || '';
+    terminalText.textContent = '';
+    
+    let charIndex = 0;
+    
+    const type = () => {
+      if (charIndex < originalText.length) {
+        terminalText.textContent += originalText.charAt(charIndex);
+        charIndex++;
+        setTimeout(type, Math.random() * 50 + 30);
+      }
+    };
+    
+    // Only start typing animation when terminal becomes visible
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(type, 300);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    observer.observe(terminalText);
+  });
+};
+
 // Initialize particles.js
 const initParticles = (): void => {
   if (typeof (window as any).particlesJS !== 'undefined') {
@@ -96,23 +241,20 @@ const initParticles = (): void => {
           }
         },
         color: {
-          value: '#44dc9e'
+          value: '#0cf'
         },
         shape: {
           type: 'circle',
           stroke: {
             width: 0,
             color: '#000000'
-          },
-          polygon: {
-            nb_sides: 5
           }
         },
         opacity: {
           value: 0.5,
-          random: true,
+          random: false,
           anim: {
-            enable: true,
+            enable: false,
             speed: 1,
             opacity_min: 0.1,
             sync: false
@@ -122,8 +264,8 @@ const initParticles = (): void => {
           value: 3,
           random: true,
           anim: {
-            enable: true,
-            speed: 2,
+            enable: false,
+            speed: 40,
             size_min: 0.1,
             sync: false
           }
@@ -131,15 +273,15 @@ const initParticles = (): void => {
         line_linked: {
           enable: true,
           distance: 150,
-          color: '#44dc9e',
+          color: '#0cf',
           opacity: 0.4,
           width: 1
         },
         move: {
           enable: true,
-          speed: 1,
+          speed: 2,
           direction: 'none',
-          random: true,
+          random: false,
           straight: false,
           out_mode: 'out',
           bounce: false,
@@ -194,14 +336,28 @@ const initParticles = (): void => {
   }
 };
 
+// Add cybersecurity console messages
+const addConsoleBanner = (): void => {
+  console.log('%c⚠️ 安全警告！', 'color: #ff3333; font-size: 48px; font-weight: bold; text-shadow: 0 0 10px #ff3333;');
+  console.log('%c此为受限区域，未经授权的访问将被跟踪并记录。', 'color: #41ff8a; font-size: 16px; font-weight: bold;');
+  console.log('%c江西财经大学网安协会 - 学习 · 创新 · 安全', 'color: #41ff8a; font-size: 14px;');
+};
+
 // Initialize
 window.addEventListener('scroll', handleScroll);
 window.addEventListener('resize', handleScroll);
 
 // Trigger scroll handler on page load
 window.addEventListener('load', () => {
-  // Initialize particles
+  // Initialize all effects
   initParticles();
+  initMatrixRain();
+  animateCounters();
+  initTypewriterEffect();
+  addConsoleBanner();
+  
+  // 初始化赛博朋克视觉效果
+  registerEffects();
   
   // Add initial animation to the first section
   const introSection = document.getElementById('intro');
