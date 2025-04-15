@@ -2326,7 +2326,7 @@ main {
 .site-tag-container {
   width: 80%;
   max-width: 700px;
-  margin: 10px auto;
+  margin: 30px auto;
   text-align: center;
   z-index: 20;
   position: relative;
@@ -2334,243 +2334,75 @@ main {
 
 .site-tag {
   margin: 0;
-  padding: 8px 15px;
-  background-color: rgba(0, 10, 15, 0.7);
+  padding: 15px;
+  background-color: rgba(0, 10, 15, 0.8);
   color: var(--primary-green);
   font-family: 'Fira Code', monospace;
-  font-size: 14px;
-  border-radius: 3px;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  border-radius: 5px;
   border: 1px solid rgba(0, 200, 120, 0.3);
-  display: inline-block;
-  box-shadow: 0 0 10px rgba(0, 255, 120, 0.1);
+  display: block;
+  box-shadow: 0 0 20px rgba(0, 255, 120, 0.2);
   text-align: center;
   width: 100%;
+  animation: fadeIn 0.8s ease-out;
 }
 
-/* 修复终端容器样式 - 增加高度 */
-.terminal-container {
-  position: relative;
-  width: 80%;
-  max-width: 700px;
-  margin: 30px auto 10px;
-  padding: 0;
-  background-color: rgba(0, 8, 12, 0.9);
-  border: 1px solid var(--primary-green);
-  border-radius: 5px;
-  box-shadow: 0 0 20px rgba(0, 255, 120, 0.2);
-  z-index: 20;
+/* 文字淡入动画 */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-5px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 确保二进制流背景效果保持在页面上 */
+.binary-stream {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
   overflow: hidden;
+  opacity: 0.4; 
+  pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
-/* 修复终端头部样式 */
-.terminal-header {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 10px;
-  border-bottom: 1px solid rgba(0, 200, 120, 0.3);
-  background-color: rgba(0, 10, 15, 0.7);
-  border-radius: 4px 4px 0 0;
+/* 当页面滚动超过首屏高度时隐藏 */
+.binary-stream.hidden {
+  opacity: 0;
 }
 
-.term-dot {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 5px;
+/* 删除可能干扰的扫描效果 */
+.scanning-effect, .cyber-lines, .cyber-grid, .scan-line {
+  display: none !important;
 }
 
-.term-dot.red { background-color: #ff5f56; }
-.term-dot.yellow { background-color: #ffbd2e; }
-.term-dot.green { background-color: #27c93f; }
-
-.term-title {
-  margin-left: 10px;
-  font-size: 12px;
-  color: var(--primary-green);
-  opacity: 0.8;
-}
-
-/* 确保闪烁光标可见 */
-.terminal-content p:last-child .terminal-chevron::after {
-  content: '█';
-  display: inline-block;
-  margin-left: 2px;
-  font-size: 14px;
-  animation: cursor-blink 1s step-end infinite;
-  color: var(--primary-green);
-}
-
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* 调整光标提示符颜色和样式 */
-.terminal-chevron {
-  color: var(--primary-green);
-  margin-right: 8px;
-  font-weight: bold;
-}
-
-/* 重新定义终端内容区域大小，使它适合图片中的显示 */
-.terminal-content {
-  padding: 10px;
-  min-height: 80px; /* 增加最小高度确保有足够空间展示多行代码 */
-  max-height: 300px; /* 设置最大高度并允许滚动 */
-  overflow-y: auto;
-}
-
-.terminal-content p {
-  margin: 0;
-  padding: 5px 0;
-  line-height: 1.5;
-  font-size: 14px;
-  color: var(--primary-green);
-  text-shadow: 0 0 2px rgba(65, 255, 138, 0.5);
-  white-space: pre-wrap; /* 保持空格和换行 */
-  word-break: break-word;
-}
-
-/* 优化光标显示 */
-.cursor {
-  display: inline-block;
-  width: 8px;
-  height: 16px;
-  background-color: var(--primary-green);
-  animation: cursor-blink 1s step-end infinite;
-  vertical-align: middle;
-  margin-left: 2px;
-}
-
-/* 增强光标闪烁效果 */
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* 确保终端文本区域有足够的空间显示打字内容 */
-.terminal-text {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: rgba(0, 8, 12, 0.8);
-  color: var(--terminal-green);
-  font-family: 'Fira Code', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  border-radius: 3px;
-  border: none;
-  box-shadow: none;
-  z-index: 20;
-  text-align: left;
-}
-
-/* 修复响应式样式 */
+/* 响应式调整 */
 @media (max-width: 768px) {
-  .terminal-container, .site-tag-container {
+  .site-tag-container {
     width: 90%;
-  }
-  
-  .terminal-header {
-    padding: 8px;
-  }
-  
-  .terminal-content {
-    min-height: 25px;
-    padding: 8px;
-  }
-  
-  .term-dot {
-    width: 10px;
-    height: 10px;
+    margin: 25px auto;
   }
   
   .site-tag {
-    font-size: 12px;
-    padding: 6px 10px;
+    font-size: 14px;
+    padding: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  .terminal-container, .site-tag-container {
+  .site-tag-container {
     width: 95%;
-  }
-  
-  .terminal-content p {
-    font-size: 12px;
+    margin: 20px auto;
   }
   
   .site-tag {
-    font-size: 11px;
-    padding: 5px 8px;
+    font-size: 13px;
+    padding: 10px;
   }
-}
-
-/* 终端响应文本样式 */
-.terminal-content p.response {
-  color: #ccf6e6;
-  padding-left: 15px;
-  font-size: 13px;
-  opacity: 0.9;
-  margin: 2px 0;
-  animation: fadeIn 0.3s ease-out;
-}
-
-/* 响应文本淡入动画 */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 0.9; }
-}
-
-/* 调整终端中的代码格式 */
-.terminal-content pre {
-  margin: 0;
-  padding: 0;
-  font-family: 'Fira Code', monospace;
-  white-space: pre-wrap;
-}
-
-/* 优化终端滚动条 */
-.terminal-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.terminal-content::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.terminal-content::-webkit-scrollbar-thumb {
-  background: rgba(65, 255, 138, 0.3);
-  border-radius: 3px;
-}
-
-.terminal-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(65, 255, 138, 0.5);
-}
-
-/* 确保光标显示在正确位置 */
-.terminal-content p span.cursor {
-  position: relative;
-  display: inline-block;
-  width: 8px;
-  height: 16px;
-  background-color: var(--primary-green);
-  vertical-align: middle;
-  margin-left: 1px;
-  animation: cursor-blink 1s step-end infinite;
-}
-
-/* 确保终端内容溢出时内容可滚动查看 */
-.terminal-content {
-  padding: 10px;
-  min-height: 100px; /* 更大的最小高度 */
-  max-height: 300px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(65, 255, 138, 0.3) rgba(0, 0, 0, 0.2);
 }
 

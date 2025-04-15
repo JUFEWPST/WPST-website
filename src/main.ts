@@ -278,116 +278,10 @@ const animateCounters = (): void => {
   }
 };
 
-// Typewriter effect for terminal text
+// 移除不再需要的打字机效果
 const initTypewriterEffect = (): void => {
-  const terminalContent = document.querySelector('.terminal-content');
-  if (!terminalContent) return;
-  
-  // 清空内容，只保留光标行
-  terminalContent.innerHTML = '<p><span class="terminal-chevron">&gt;</span> <span class="cursor"></span></p>';
-  
-  // 定义要展示的命令和结果序列
-  const commands = [
-    { 
-      text: 'echo "欢迎访问江西财经大学网络安全协会官方网站"', 
-      delay: 100,
-      response: '欢迎访问江西财经大学网络安全协会官方网站'
-    },
-    { 
-      text: 'cat about.txt', 
-      delay: 800,
-      response: '专注于网络安全教育、技术研究与实践的学生社团\n致力于培养学生的网络安全意识和技术能力\n提供CTF竞赛培训、渗透测试实践、密码学研究等专业领域的学习机会'
-    },
-    { 
-      text: 'ls -la projects/', 
-      delay: 700,
-      response: 'drwxr-xr-x  2 jxufe users  4096 Oct 15 10:23 CTF竞赛\ndrwxr-xr-x  2 jxufe users  4096 Oct 16 15:42 安全开发\ndrwxr-xr-x  2 jxufe users  4096 Oct 14 09:15 渗透测试\ndrwxr-xr-x  2 jxufe users  4096 Oct 13 14:30 网络安全意识培训\ndrwxr-xr-x  2 jxufe users  4096 Oct 17 16:20 密码学研究'
-    },
-    {
-      text: 'join --team "JXUFE.SEC"',
-      delay: 600,
-      response: '学习 · 创新 · 安全 —— 江西财经大学网络安全协会欢迎您的加入！'
-    }
-  ];
-  
-  let currentCommandIndex = 0;
-  let currentCharIndex = 0;
-  
-  // 打字动画函数
-  const typeCommand = () => {
-    if (currentCommandIndex >= commands.length) {
-      // 所有命令执行完毕后，添加最后一行带闪烁光标的行
-      const finalLine = document.createElement('p');
-      finalLine.innerHTML = '<span class="terminal-chevron">&gt;</span> <span class="cursor"></span>';
-      terminalContent.appendChild(finalLine);
-      return;
-    }
-    
-    const command = commands[currentCommandIndex];
-    const currentLine = terminalContent.querySelector('p:last-child');
-    
-    if (!currentLine) return; // 确保行元素存在
-    
-    if (currentCharIndex < command.text.length) {
-      // 获取当前光标位置元素
-      const cursorElement = currentLine.querySelector('.cursor');
-      
-      if (!cursorElement) return; // 确保光标元素存在
-      
-      // 添加下一个字符
-      cursorElement.textContent = command.text.substring(0, currentCharIndex + 1);
-      
-      // 继续下一个字符
-      currentCharIndex++;
-      setTimeout(typeCommand, Math.random() * 30 + 30);
-    } else {
-      // 命令输入完成
-      const commandElement = terminalContent.querySelector('p:last-child');
-      
-      if (!commandElement) return; // 确保命令元素存在
-      
-      // 显示完整命令
-      commandElement.innerHTML = `<span class="terminal-chevron">&gt;</span> ${command.text}`;
-      
-      // 添加命令响应
-      setTimeout(() => {
-        if (command.response) {
-          const responseLines = command.response.split('\n');
-          
-          // 为每行响应创建段落
-          for (const line of responseLines) {
-            const responseParagraph = document.createElement('p');
-            responseParagraph.className = 'response';
-            responseParagraph.textContent = line;
-            terminalContent.appendChild(responseParagraph);
-          }
-          
-          // 滚动到底部
-          terminalContent.scrollTop = terminalContent.scrollHeight;
-        }
-        
-        // 添加下一个命令行
-        setTimeout(() => {
-          const newLine = document.createElement('p');
-          newLine.innerHTML = '<span class="terminal-chevron">&gt;</span> <span class="cursor"></span>';
-          terminalContent.appendChild(newLine);
-          
-          // 滚动到底部
-          terminalContent.scrollTop = terminalContent.scrollHeight;
-          
-          // 重置字符索引并增加命令索引
-          currentCharIndex = 0;
-          currentCommandIndex++;
-          
-          // 继续下一个命令
-          setTimeout(typeCommand, command.delay);
-        }, 300);
-      }, 500);
-    }
-  };
-  
-  // 开始输入第一个命令
-  setTimeout(typeCommand, 800);
+  // 不再需要打字机效果，使该函数成为空函数
+  console.log('Typewriter effect disabled');
 };
 
 // Initialize particles.js
@@ -539,6 +433,7 @@ window.addEventListener('load', () => {
   initParticles();
   initMatrixRain();
   animateCounters();
+  // 仍然调用初始化函数，但内部不执行任何操作
   initTypewriterEffect();
   addConsoleBanner();
   
