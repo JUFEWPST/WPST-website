@@ -31,6 +31,9 @@ export class MatrixRain {
       this.canvas = canvasElement as HTMLCanvasElement;
     }
 
+    // 增加z-index确保元素可见
+    this.canvas.style.zIndex = '0';
+    
     // 获取2D上下文
     const ctx = this.canvas.getContext('2d');
     if (!ctx) {
@@ -111,7 +114,7 @@ export class MatrixRain {
     if (!this.ctx) return;
     
     // 添加半透明黑色背景，产生尾巴效果
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.02)';  // 降低透明度变化速度
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     // 设置文字样式
@@ -129,8 +132,8 @@ export class MatrixRain {
       if (this.drops[i] <= 1) {
         this.ctx.fillStyle = 'rgba(180, 255, 180, 1)';
       } else {
-        // 绘制文字 - 随机透明度增加变化
-        const alpha = Math.max(0.8 - (this.drops[i] * 0.01), 0.1);
+        // 绘制文字 - 降低透明度衰减速度
+        const alpha = Math.max(0.9 - (this.drops[i] * 0.005), 0.3);  // 提高最小透明度
         this.ctx.fillStyle = `rgba(65, 255, 138, ${alpha})`;
       }
       
@@ -138,12 +141,12 @@ export class MatrixRain {
       this.ctx.fillText(text, i * this.fontSize, y);
 
       // 当字符到达底部或有小概率时重置
-      if (y > this.canvas.height || Math.random() > 0.99) {
+      if (y > this.canvas.height || Math.random() > 0.995) {  // 降低重置概率
         this.drops[i] = 0;
       }
 
       // 移动雨滴
-      this.drops[i] += 0.5 + Math.random() * 0.5; // 随机速度，更自然
+      this.drops[i] += 0.3 + Math.random() * 0.3; // 降低速度，更持久
     }
   }
 

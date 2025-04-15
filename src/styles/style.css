@@ -1554,27 +1554,21 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
   pointer-events: none;
-  opacity: 0.8;
-  display: block;
+  z-index: 1;  /* 提高z-index确保可见性 */
+  opacity: 0.8;  /* 提高不透明度 */
+  mix-blend-mode: screen;
 }
 
 /* 响应式调整 */
 @media (max-width: 768px) {
+  .matrix-rain, .binary-stream {
+    opacity: 0.5;  /* 在移动设备上降低透明度以提高可读性 */
+  }
+  
   .terminal-text {
-    font-size: 0.8rem;
-    padding: 0.7rem;
-  }
-  
-  .term-dot {
-    width: 8px;
-    height: 8px;
-  }
-  
-  .security-badge {
-    width: 30px;
-    height: 30px;
+    font-size: 12px;
+    padding: 10px;
   }
 }
 
@@ -1712,30 +1706,39 @@ h2.section-title, h3.feature-title {
 
 /* 扫描特效 */
 .scanning-effect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, 
-    transparent, 
-    transparent 50%, 
-    rgba(65, 255, 138, 0.05) 50%, 
-    rgba(65, 255, 138, 0.05));
-  background-size: 100% 4px;
-  animation: scanEffect 2s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.5;
+  position: relative;
+  margin: 20px 0;  /* 增加上下margin避免重叠 */
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--primary-green);
+  border: 1px solid var(--primary-green);
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  line-height: 1.5;  /* 增加行高 */
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  z-index: 10;  /* 提高z-index确保在前景 */
 }
 
-@keyframes scanEffect {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 100px;
-  }
+/* 确保中间代码区域可见 */
+.terminal-text {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: rgba(0, 8, 12, 0.8);
+  color: var(--terminal-green);
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 200, 120, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 120, 0.1);
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10;  /* 提高z-index */
 }
 
 /* 高级数据扫描线 */
@@ -1888,9 +1891,9 @@ h2.section-title, h3.feature-title {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: 1;  /* 提高z-index值 */
   overflow: hidden;
-  opacity: 0.15;
+  opacity: 0.4;  /* 提高不透明度 */
   pointer-events: none;
 }
 
@@ -2027,37 +2030,7 @@ h2.section-title, h3.feature-title {
 
 /* 端口扫描视觉效果 */
 .port-scan {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  font-family: 'Fira Code', monospace;
-  font-size: 12px;
-  color: var(--primary-green);
-  opacity: 0.7;
-  padding: 5px 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 3px;
-  border: 1px solid rgba(65, 255, 138, 0.3);
-  pointer-events: none;
-  z-index: 1000;
-  max-width: 300px;
-  overflow: hidden;
-  animation: portScan 15s steps(60) infinite;
-}
-
-@keyframes portScan {
-  0% {
-    height: 20px;
-  }
-  10% {
-    height: 80px;
-  }
-  90% {
-    height: 80px;
-  }
-  100% {
-    height: 20px;
-  }
+  display: none;  /* 隐藏端口扫描显示 */
 }
 
 /* 固定导航栏样式 */

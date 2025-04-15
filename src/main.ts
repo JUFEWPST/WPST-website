@@ -10,7 +10,7 @@ const header = document.querySelector('header');
 // 导入视觉效果模块
 import { registerEffects } from './effects';
 // 导入黑客帝国风格效果
-import { MatrixRain, createBinaryStreams, createHexDisplay, createPortScan, createIntrusionWarning } from './matrixRain';
+import { MatrixRain, createBinaryStreams, createHexDisplay, createIntrusionWarning } from './matrixRain';
 
 // 滚动相关变量
 let lastScrollTop = 0;
@@ -179,8 +179,8 @@ const initMatrixRain = (): void => {
     // 创建十六进制数据显示
     createHexDisplay();
     
-    // 创建端口扫描模拟
-    createPortScan();
+    // 删除端口扫描模拟
+    // createPortScan();
     
     // 随机显示入侵警告
     if (Math.random() > 0.7) {
