@@ -10,6 +10,7 @@ export class MatrixRain {
   private fontSize: number = 14;
   private columns: number = 0;
   private characters: string[] = [];
+  private animationId: number | null = null;
 
   /**
    * 构造函数
@@ -18,10 +19,16 @@ export class MatrixRain {
    */
   constructor(canvasId: string, mode: 'binary' | 'matrix' | 'hex' = 'matrix') {
     // 获取画布元素
-    this.canvas = document.getElementById(canvasId) as HTMLCanvasElement;
-    if (!this.canvas) {
+    const canvasElement = document.getElementById(canvasId);
+    if (!canvasElement) {
       console.error(`Canvas with id ${canvasId} not found`);
-      return;
+      // 创建新的canvas元素
+      this.canvas = document.createElement('canvas');
+      this.canvas.id = canvasId;
+      this.canvas.className = 'matrix-rain';
+      document.body.appendChild(this.canvas);
+    } else {
+      this.canvas = canvasElement as HTMLCanvasElement;
     }
 
     // 获取2D上下文
@@ -53,7 +60,24 @@ export class MatrixRain {
     this.initDrops();
 
     // 添加窗口大小改变事件监听
-    window.addEventListener('resize', this.resizeCanvas.bind(this));
+    window.addEventListener('resize', this.handleResize.bind(this));
+  }
+
+  /**
+   * 处理窗口大小变化
+   */
+  private handleResize(): void {
+    // 停止当前动画
+    if (this.animationId !== null) {
+      cancelAnimationFrame(this.animationId);
+      this.animationId = null;
+    }
+    
+    // 调整画布大小
+    this.resizeCanvas();
+    
+    // 重新启动动画
+    this.start();
   }
 
   /**
@@ -91,7 +115,6 @@ export class MatrixRain {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     // 设置文字样式
-    this.ctx.fillStyle = '#41ff8a'; // 矩阵绿色
     this.ctx.font = `${this.fontSize}px "Fira Code", monospace`;
 
     // 绘制每列的字符
@@ -102,9 +125,14 @@ export class MatrixRain {
       // 获取当前y位置
       const y = this.drops[i] * this.fontSize;
       
-      // 绘制文字 - 随机透明度增加变化
-      const alpha = Math.random() * 0.5 + 0.5;
-      this.ctx.fillStyle = `rgba(65, 255, 138, ${alpha})`;
+      // 对第一个字符使用更亮的绿色，创建"头部"效果
+      if (this.drops[i] <= 1) {
+        this.ctx.fillStyle = 'rgba(180, 255, 180, 1)';
+      } else {
+        // 绘制文字 - 随机透明度增加变化
+        const alpha = Math.max(0.8 - (this.drops[i] * 0.01), 0.1);
+        this.ctx.fillStyle = `rgba(65, 255, 138, ${alpha})`;
+      }
       
       // 绘制字符
       this.ctx.fillText(text, i * this.fontSize, y);
@@ -115,7 +143,7 @@ export class MatrixRain {
       }
 
       // 移动雨滴
-      this.drops[i]++;
+      this.drops[i] += 0.5 + Math.random() * 0.5; // 随机速度，更自然
     }
   }
 
@@ -123,14 +151,29 @@ export class MatrixRain {
    * 开始动画
    */
   public start(): void {
+    // 防止多次启动
+    if (this.animationId !== null) {
+      cancelAnimationFrame(this.animationId);
+    }
+    
     // 动画函数
     const animate = (): void => {
       this.draw();
-      requestAnimationFrame(animate);
+      this.animationId = requestAnimationFrame(animate);
     };
     
     // 启动动画
-    animate();
+    this.animationId = requestAnimationFrame(animate);
+  }
+
+  /**
+   * 停止动画
+   */
+  public stop(): void {
+    if (this.animationId !== null) {
+      cancelAnimationFrame(this.animationId);
+      this.animationId = null;
+    }
   }
 }
 

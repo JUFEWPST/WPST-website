@@ -1554,9 +1554,10 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -4;
-  opacity: 0.07;
+  z-index: -1;
   pointer-events: none;
+  opacity: 0.8;
+  display: block;
 }
 
 /* 响应式调整 */
@@ -2065,88 +2066,203 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: rgba(5, 10, 20, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Safari兼容性 */
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   z-index: 1000;
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 0 20px rgba(0, 204, 255, 0.1);
-  height: var(--nav-height);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  background-color: rgba(0, 15, 20, 0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(65, 255, 138, 0.2);
+  transition: all 0.3s ease;
 }
 
-/* 向下滚动时隐藏导航栏 */
-header.nav-hidden {
-  transform: translateY(-100%);
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* 向上滚动时显示导航栏 */
-header.nav-visible {
-  transform: translateY(0);
-  background-color: rgba(5, 10, 20, 0.95); /* 滚动时更不透明 */
+.logo-text {
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  letter-spacing: 1px;
 }
 
-/* 为固定导航栏添加内容的顶部填充 */
+.logo-icon {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-button {
+  color: var(--text-color);
+  text-decoration: none;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  background-color: rgba(65, 255, 138, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-button:hover {
+  color: var(--primary-color);
+  background-color: rgba(65, 255, 138, 0.1);
+  border-color: rgba(65, 255, 138, 0.3);
+  box-shadow: 0 0 10px rgba(65, 255, 138, 0.2);
+}
+
+.nav-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.nav-button:hover::after {
+  width: 100%;
+}
+
+/* 让每个部分的背景更加美观 */
+.section {
+  padding: 6rem 2rem 4rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.section:nth-child(1) { background-color: rgba(0, 15, 20, 0.95); }
+.section:nth-child(2) { background-color: rgba(5, 20, 30, 0.95); }
+.section:nth-child(3) { background-color: rgba(10, 25, 20, 0.95); }
+.section:nth-child(4) { background-color: rgba(5, 15, 35, 0.95); }
+.section:nth-child(5) { background-color: rgba(15, 10, 25, 0.95); }
+.section:nth-child(6) { background-color: rgba(20, 5, 15, 0.95); }
+
+/* 确保主页面布局正确 */
 main {
-  padding-top: var(--nav-height);
+  padding-top: 60px;
+  position: relative;
+  z-index: 1;
 }
 
-/* 移动端导航菜单 */
+/* 优化Hero区域 */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 120px;
+}
+
+.hero-section .section-title {
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px rgba(65, 255, 138, 0.5);
+}
+
+/* 调整二进制流样式，确保它们正确显示 */
+.binary-stream {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.binary-column {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  animation: binaryDrop linear infinite;
+}
+
+.binary-bit {
+  font-family: 'Fira Code', monospace;
+  color: var(--primary-color);
+  font-size: 14px;
+  line-height: 1.2;
+  text-shadow: 0 0 5px var(--primary-color);
+}
+
+/* 确保移动菜单按钮在移动设备上正确显示 */
+.mobile-menu-toggle {
+  display: none;
+  font-family: 'Fira Code', monospace;
+  color: var(--primary-color);
+  background: none;
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+  background-color: rgba(65, 255, 138, 0.1);
+}
+
 @media (max-width: 768px) {
-  .main-nav {
-    position: fixed;
-    top: var(--nav-height);
-    left: 0;
-    width: 100%;
-    background-color: rgba(5, 10, 20, 0.95);
-    padding: 1rem;
-    flex-direction: column;
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 999;
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-  }
-
-  .main-nav.show {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
   .mobile-menu-toggle {
     display: block;
-    cursor: pointer;
-    font-family: 'Fira Code', monospace;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--button-bg);
-    color: var(--accent-color);
-    z-index: 1001;
-  }
-
-  .nav-button {
-    margin: 0.5rem 0;
-    text-align: center;
-    padding: 0.75rem;
-  }
-}
-
-/* 确保导航在不同屏幕尺寸上的良好表现 */
-@media (min-width: 769px) {
-  .mobile-menu-toggle {
-    display: none;
   }
   
   .main-nav {
-    display: flex;
-    gap: 1.5rem;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 15, 20, 0.95);
+    flex-direction: column;
+    padding: 1rem;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    align-items: center;
+    backdrop-filter: blur(10px);
+  }
+  
+  .main-nav.show {
+    transform: translateY(0);
+  }
+  
+  .nav-button {
+    width: 90%;
+    text-align: center;
+    margin: 0.25rem 0;
+  }
+}
+
+/* 优化各种视觉效果的响应性 */
+@media (max-width: 768px) {
+  .matrix-rain, .binary-stream {
+    opacity: 0.3;
+  }
+  
+  .hero-section .section-title {
+    font-size: 1.8rem;
   }
 }
 
