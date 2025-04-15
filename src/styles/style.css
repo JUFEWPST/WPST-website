@@ -1402,77 +1402,108 @@ footer {
 
 /* 新增终端文本效果 */
 .terminal-text {
-  font-family: var(--hacker-font);
-  color: var(--primary-green);
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 1rem;
-  border-radius: 5px;
-  border-left: 3px solid var(--primary-green);
-  margin: 1.5rem 0;
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-  white-space: nowrap;
-}
-
-.terminal-text::before {
-  content: '> ';
-  color: var(--primary-green);
-  opacity: 0.8;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: rgba(0, 8, 12, 0.8);
+  color: var(--terminal-green);
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 200, 120, 0.3);
+  box-shadow: 0 0 15px rgba(0, 255, 120, 0.1);
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10;
+  text-align: left;
 }
 
 .terminal-header {
-  background-color: rgba(12, 14, 20, 0.8);
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  padding: 6px 10px;
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 200, 120, 0.3);
 }
 
 .term-dot {
+  display: inline-block;
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  margin-right: 6px;
+  margin-right: 5px;
 }
 
-.term-dot.red {
-  background-color: #ff3b30;
-}
-
-.term-dot.yellow {
-  background-color: #ffcc00;
-}
-
-.term-dot.green {
-  background-color: #41ff8a;
-}
+.term-dot.red { background-color: #ff5f56; }
+.term-dot.yellow { background-color: #ffbd2e; }
+.term-dot.green { background-color: #27c93f; }
 
 .term-title {
-  font-family: var(--hacker-font);
-  font-size: 12px;
-  color: var(--text-color);
   margin-left: 10px;
+  font-size: 12px;
+  color: var(--terminal-green);
   opacity: 0.8;
 }
 
-.terminal-chevron {
-  color: var(--primary-green);
-  font-family: var(--hacker-font);
-  margin-right: 5px;
-  animation: blink 1s infinite;
+.terminal-content {
+  padding: 5px 0;
 }
 
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
+.terminal-content p {
+  margin: 0;
+  padding: 3px 0;
+  line-height: 1.5;
+}
+
+.terminal-chevron {
+  color: var(--accent-blue);
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+/* 确保终端文本中的打字效果正确显示 */
+#terminalDisplay {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  z-index: 20;
+}
+
+/* 修复红框区域的样式 */
+.terminal-container {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: rgba(0, 8, 12, 0.9);
+  border: 1px solid var(--primary-green);
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 255, 120, 0.2);
+  z-index: 20;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* 调整移动设备的响应式样式 */
+@media (max-width: 768px) {
+  .terminal-text {
+    font-size: 12px;
+    padding: 10px;
+    margin: 15px auto;
   }
-  50% {
-    opacity: 0.3;
+  
+  .term-dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .terminal-content p {
+    padding: 2px 0;
   }
 }
 
@@ -2137,6 +2168,8 @@ header {
   justify-content: center; /* 水平居中 */
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap; /* 允许在窄屏上换行 */
+  max-width: 100%; /* 确保不会溢出屏幕 */
 }
 
 .logo {
@@ -2159,17 +2192,23 @@ header {
 }
 
 .nav-button {
-  color: var(--text-color);
-  text-decoration: none;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.95rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  transition: all 0.3s ease;
-  background-color: rgba(65, 255, 138, 0.05);
   position: relative;
+  padding: 0.6rem 1rem;
+  margin: 0 0.25rem;
+  background-color: rgba(0, 30, 40, 0.4);
+  color: var(--text-color);
+  border: 1px solid rgba(0, 200, 120, 0.3);
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  transition: all 0.3s ease;
   overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap; /* 防止文本换行 */
 }
 
 .nav-button:hover {
@@ -2267,49 +2306,36 @@ main {
 /* 确保移动菜单按钮在移动设备上正确显示 */
 .mobile-menu-toggle {
   display: none;
-  font-family: 'Fira Code', monospace;
-  color: var(--primary-color);
-  background: none;
-  border: 1px solid var(--primary-color);
-  padding: 0.5rem 1rem;
+  width: 35px;
+  height: 35px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background-color: rgba(0, 40, 30, 0.5);
+  border: 1px solid rgba(0, 255, 120, 0.3);
   border-radius: 4px;
   cursor: pointer;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1100;
+}
+
+.mobile-menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-green);
   transition: all 0.3s ease;
 }
 
-.mobile-menu-toggle:hover {
-  background-color: rgba(65, 255, 138, 0.1);
-}
-
-@media (max-width: 768px) {
-  .mobile-menu-toggle {
-    display: block;
-  }
-  
+/* 移动端响应式调整 */
+@media (max-width: 992px) {
   .main-nav {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 15, 20, 0.95);
-    flex-direction: column;
-    padding: 1rem;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
-    z-index: 999;
-    align-items: center;
-    backdrop-filter: blur(10px);
+    gap: 0.5rem;
   }
   
-  .main-nav.show {
-    transform: translateY(0);
-  }
-  
-  .nav-button {
-    width: 90%;
-    text-align: center;
-    margin: 0.25rem 0;
-  }
 }
 
 /* 优化各种视觉效果的响应性 */
@@ -2320,6 +2346,78 @@ main {
   
   .hero-section .section-title {
     font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 0.25rem;
+    justify-content: flex-start;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .logo {
+    margin-left: 10px;
+  }
+  
+  .main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 15, 20, 0.95);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    transform: translateY(-100%);
+    transition: transform 0.4s ease;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+  }
+  
+  .main-nav.show {
+    transform: translateY(0);
+  }
+  
+  .nav-button {
+    width: 80%;
+    max-width: 300px;
+    padding: 0.8rem 1rem;
+    margin: 0.3rem 0;
+    font-size: 1rem;
+  }
+  
+  /* 汉堡菜单动画 */
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  
+  /* 优化终端显示 */
+  .terminal-container {
+    width: 95%;
+  }
+  
+  .terminal-text {
+    font-size: 12px;
+    padding: 10px;
+  }
+  
+  /* 优化矩阵雨效果在移动端的显示 */
+  .matrix-rain, .binary-stream {
+    opacity: 0.4; /* 降低移动设备上的不透明度以提高文本可读性 */
   }
 }
 

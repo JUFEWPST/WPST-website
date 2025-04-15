@@ -124,15 +124,18 @@ const handleScroll = (): void => {
 };
 
 // Mobile menu toggle
-if (mobileNavToggle) {
-  mobileNavToggle.addEventListener('click', () => {
+const setupMobileMenu = (): void => {
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  if (!mobileMenuToggle) return;
+  
+  mobileMenuToggle.addEventListener('click', () => {
     const mainNav = document.querySelector('.main-nav');
     if (mainNav) {
       mainNav.classList.toggle('show');
     }
-    mobileNavToggle.classList.toggle('active');
+    mobileMenuToggle.classList.toggle('active');
   });
-}
+};
 
 // 点击导航链接时关闭移动菜单
 const setupNavLinkClick = () => {
@@ -140,10 +143,12 @@ const setupNavLinkClick = () => {
   navButtons.forEach(button => {
     button.addEventListener('click', () => {
       const mainNav = document.querySelector('.main-nav');
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      
       if (window.innerWidth <= 768 && mainNav && mainNav.classList.contains('show')) {
         mainNav.classList.remove('show');
-        if (mobileNavToggle) {
-          mobileNavToggle.classList.remove('active');
+        if (mobileMenuToggle) {
+          mobileMenuToggle.classList.remove('active');
         }
       }
     });
@@ -275,34 +280,45 @@ const animateCounters = (): void => {
 
 // Typewriter effect for terminal text
 const initTypewriterEffect = (): void => {
-  const terminalTexts = document.querySelectorAll('.terminal-text');
+  const terminalContent = document.querySelector('.terminal-content');
+  if (!terminalContent) return;
   
-  terminalTexts.forEach((terminalText) => {
-    const originalText = terminalText.textContent || '';
-    terminalText.textContent = '';
-    
-    let charIndex = 0;
-    
-    const type = () => {
-      if (charIndex < originalText.length) {
-        terminalText.textContent += originalText.charAt(charIndex);
-        charIndex++;
-        setTimeout(type, Math.random() * 50 + 30);
+  // 保存原始HTML内容
+  const originalContent = terminalContent.innerHTML;
+  
+  // 清空容器，只保留第一行
+  const firstLine = terminalContent.querySelector('p');
+  terminalContent.innerHTML = '';
+  if (firstLine) {
+    terminalContent.appendChild(firstLine.cloneNode(true));
+  }
+  
+  // 从HTML解析出所有行
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = originalContent;
+  const lines = tempDiv.querySelectorAll('p');
+  
+  // 动态添加每一行
+  let lineIndex = 0;
+  
+  const typeLine = () => {
+    if (lineIndex < lines.length) {
+      // 跳过第一行，因为已经添加了
+      if (lineIndex > 0 || !firstLine) {
+        const line = lines[lineIndex];
+        terminalContent.appendChild(line.cloneNode(true));
+        
+        // 滚动到底部
+        terminalContent.scrollTop = terminalContent.scrollHeight;
       }
-    };
-    
-    // Only start typing animation when terminal becomes visible
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setTimeout(type, 300);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    observer.observe(terminalText);
-  });
+      
+      lineIndex++;
+      setTimeout(typeLine, Math.random() * 150 + 100);
+    }
+  };
+  
+  // 开始打字效果
+  setTimeout(typeLine, 500);
 };
 
 // Initialize particles.js
@@ -459,6 +475,9 @@ window.addEventListener('load', () => {
   
   // 初始化赛博朋克视觉效果
   registerEffects();
+  
+  // 设置移动端菜单
+  setupMobileMenu();
   
   // 设置导航链接点击事件
   setupNavLinkClick();
