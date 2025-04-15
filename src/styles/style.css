@@ -2347,7 +2347,7 @@ main {
   width: 100%;
 }
 
-/* 修复终端容器样式 */
+/* 修复终端容器样式 - 增加高度 */
 .terminal-container {
   position: relative;
   width: 80%;
@@ -2417,16 +2417,56 @@ main {
 /* 重新定义终端内容区域大小，使它适合图片中的显示 */
 .terminal-content {
   padding: 10px;
-  min-height: 30px;
+  min-height: 80px; /* 增加最小高度确保有足够空间展示多行代码 */
+  max-height: 300px; /* 设置最大高度并允许滚动 */
+  overflow-y: auto;
 }
 
 .terminal-content p {
   margin: 0;
-  padding: 0;
+  padding: 5px 0;
   line-height: 1.5;
   font-size: 14px;
   color: var(--primary-green);
   text-shadow: 0 0 2px rgba(65, 255, 138, 0.5);
+  white-space: pre-wrap; /* 保持空格和换行 */
+  word-break: break-word;
+}
+
+/* 优化光标显示 */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background-color: var(--primary-green);
+  animation: cursor-blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+/* 增强光标闪烁效果 */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 确保终端文本区域有足够的空间显示打字内容 */
+.terminal-text {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 8, 12, 0.8);
+  color: var(--terminal-green);
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 3px;
+  border: none;
+  box-shadow: none;
+  z-index: 20;
+  text-align: left;
 }
 
 /* 修复响应式样式 */
@@ -2468,5 +2508,69 @@ main {
     font-size: 11px;
     padding: 5px 8px;
   }
+}
+
+/* 终端响应文本样式 */
+.terminal-content p.response {
+  color: #ccf6e6;
+  padding-left: 15px;
+  font-size: 13px;
+  opacity: 0.9;
+  margin: 2px 0;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 响应文本淡入动画 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 0.9; }
+}
+
+/* 调整终端中的代码格式 */
+.terminal-content pre {
+  margin: 0;
+  padding: 0;
+  font-family: 'Fira Code', monospace;
+  white-space: pre-wrap;
+}
+
+/* 优化终端滚动条 */
+.terminal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+  background: rgba(65, 255, 138, 0.3);
+  border-radius: 3px;
+}
+
+.terminal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(65, 255, 138, 0.5);
+}
+
+/* 确保光标显示在正确位置 */
+.terminal-content p span.cursor {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  background-color: var(--primary-green);
+  vertical-align: middle;
+  margin-left: 1px;
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* 确保终端内容溢出时内容可滚动查看 */
+.terminal-content {
+  padding: 10px;
+  min-height: 100px; /* 更大的最小高度 */
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(65, 255, 138, 0.3) rgba(0, 0, 0, 0.2);
 }
 
