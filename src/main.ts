@@ -4,10 +4,12 @@ const navMenu = document.querySelector('.nav-menu');
 const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
 const cyberButton = document.querySelector('.cyber-button#aboutButton');
 const servicesButton = document.querySelector('.cyber-button#servicesButton');
-const matrixCanvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
+const matrixCanvas = document.getElementById('matrixRain') as HTMLCanvasElement;
 
 // 导入视觉效果模块
 import { registerEffects } from './effects';
+// 导入黑客帝国风格效果
+import { MatrixRain, createBinaryStreams, createHexDisplay, createPortScan, createIntrusionWarning } from './matrixRain';
 
 // Helper function to check if an element is in the viewport
 const isInViewport = (element: Element): boolean => {
@@ -91,66 +93,25 @@ if (servicesButton) {
 const initMatrixRain = (): void => {
   if (!matrixCanvas) return;
   
-  const ctx = matrixCanvas.getContext('2d');
-  if (!ctx) return;
+  // 使用升级版的黑客帝国风格矩阵雨
+  const matrixRain = new MatrixRain('matrixRain', 'binary');
+  matrixRain.start();
   
-  // Make canvas full screen
-  matrixCanvas.width = window.innerWidth;
-  matrixCanvas.height = window.innerHeight;
+  // 创建二进制流效果
+  createBinaryStreams();
   
-  // Characters to use
-  const chars = '01ABCDEF'.split('');
+  // 创建十六进制数据显示
+  createHexDisplay();
   
-  // Font size
-  const fontSize = 14;
+  // 创建端口扫描模拟
+  createPortScan();
   
-  // Number of columns
-  const columns = Math.floor(matrixCanvas.width / fontSize);
-  
-  // Array to track the y position of each column
-  const drops: number[] = [];
-  
-  // Initialize drops
-  for (let i = 0; i < columns; i++) {
-    drops[i] = Math.random() * -100;
+  // 随机显示入侵警告
+  if (Math.random() > 0.7) {
+    setTimeout(() => {
+      createIntrusionWarning();
+    }, 5000);
   }
-  
-  // Draw function
-  const draw = () => {
-    // Semi-transparent black background for trail effect
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-    
-    // Green text
-    ctx.fillStyle = '#0cf';
-    ctx.font = `${fontSize}px monospace`;
-    
-    // Draw drops
-    for (let i = 0; i < drops.length; i++) {
-      // Random character
-      const char = chars[Math.floor(Math.random() * chars.length)];
-      
-      // Draw character
-      ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-      
-      // If it's reached the bottom or random chance, reset
-      if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-      
-      // Move drop down
-      drops[i]++;
-    }
-  };
-  
-  // Run the animation
-  setInterval(draw, 40);
-  
-  // Resize canvas on window resize
-  window.addEventListener('resize', () => {
-    matrixCanvas.width = window.innerWidth;
-    matrixCanvas.height = window.innerHeight;
-  });
 };
 
 // Counter Animation for Stats
@@ -358,6 +319,11 @@ window.addEventListener('load', () => {
   
   // 初始化赛博朋克视觉效果
   registerEffects();
+  
+  // 每隔一段时间更新二进制流
+  setInterval(() => {
+    createBinaryStreams();
+  }, 30000);
   
   // Add initial animation to the first section
   const introSection = document.getElementById('intro');

@@ -1876,698 +1876,186 @@ h2.section-title, h3.feature-title {
   height: 100%;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.3;
+  opacity: 0.4;
   mix-blend-mode: screen;
 }
 
-/* 代码片段样式 */
-.code-snippet {
-  display: block;
-  font-family: var(--hacker-font);
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  padding: 1rem;
-  margin: 1rem 0;
-  overflow-x: auto;
-  position: relative;
-  border-left: 3px solid var(--primary-green);
-}
-
-.code-snippet::before {
-  content: attr(data-language);
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: var(--primary-green);
-  color: var(--primary-dark);
-  font-size: 0.7rem;
-  padding: 0.2rem 0.5rem;
-  border-bottom-left-radius: 5px;
-}
-
-/* 数据可视化模拟 */
-.data-visualization {
-  width: 100%;
-  height: 50px;
-  background: linear-gradient(90deg, var(--primary-green) 30%, var(--accent-blue) 30%, var(--accent-blue) 65%, var(--accent-purple) 65%);
-  border-radius: 3px;
-  margin: 1rem 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.data-visualization::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 5px,
-    rgba(255, 255, 255, 0.05) 5px,
-    rgba(255, 255, 255, 0.05) 10px
-  );
-}
-
-/* 高级悬停状态 */
-.nav-button:hover::before {
-  content: '>';
-  position: absolute;
-  left: 10px;
-  animation: type-cursor 0.8s infinite;
-  font-family: var(--hacker-font);
-}
-
-@keyframes type-cursor {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-/* 动态边框效果 */
-.dynamic-border {
-  position: relative;
-  border: 1px solid transparent;
-  background-clip: padding-box;
-  border-radius: 5px;
-}
-
-.dynamic-border::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, var(--primary-green), var(--accent-blue), var(--accent-purple));
-  z-index: -1;
-  animation: border-rotate 3s linear infinite;
-  border-radius: 7px;
-}
-
-@keyframes border-rotate {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 300% 0%;
-  }
-}
-
-/* 更好的SVG交互 */
-.illustration svg * {
-  transition: all 0.5s ease;
-}
-
-.illustration:hover svg path {
-  stroke-dasharray: 5;
-  animation: dash 5s linear infinite;
-}
-
-@keyframes dash {
-  to {
-    stroke-dashoffset: 1000;
-  }
-}
-
-/* 数字雨效果 */
-.matrix-rain {
+/* 添加二进制码流特效 */
+.binary-stream {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
   opacity: 0.15;
   pointer-events: none;
 }
 
-/* 扫描线效果 */
-.scan-line {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, transparent, var(--accent-color), transparent);
-  opacity: 0.7;
-  pointer-events: none;
-  z-index: -1;
-  animation: scanLine 2s linear infinite;
-}
-
-@keyframes scanLine {
-  0% {
-    top: 0;
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.8;
-  }
-  80% {
-    opacity: 0.8;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
-}
-
-/* 网格背景 */
-.cyber-lines {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-  background-size: 50px 50px;
-  z-index: -3;
-  opacity: 0.2;
-  pointer-events: none;
-}
-
-/* 头部样式 */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: rgba(5, 10, 20, 0.85);
-  backdrop-filter: blur(10px);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 0 20px rgba(0, 204, 255, 0.1);
-  height: var(--nav-height);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.logo-text {
-  font-family: 'Fira Code', monospace;
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: var(--accent-color);
-  letter-spacing: 1px;
-}
-
-.logo-icon {
-  font-family: 'Fira Code', monospace;
-  font-weight: 500;
-  font-size: 1.2rem;
-  color: var(--primary-color);
-}
-
-.main-nav {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-button {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.nav-button:hover, .nav-button:focus {
-  color: var(--accent-color);
-  border-color: var(--border-color);
-  background-color: var(--button-bg);
-  box-shadow: 0 0 10px var(--border-glow);
-}
-
-.nav-button::after {
-  content: '';
+.binary-column {
   position: absolute;
-  bottom: -3px;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: var(--accent-color);
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-.nav-button:hover::after {
-  width: 80%;
-}
-
-.mobile-menu-toggle {
-  display: none;
-  font-family: 'Fira Code', monospace;
-  cursor: pointer;
-  padding: 0.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--button-bg);
-  color: var(--accent-color);
-}
-
-/* 英雄区域样式 */
-.hero-section {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  padding-top: var(--nav-height);
-  background-color: var(--background-dark);
-}
-
-.hero-section .container {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 1200px;
-  padding: 0 2rem;
-}
-
-.section-title {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  position: relative;
-  display: inline-block;
-}
-
-.section-title .accent {
-  color: var(--accent-color);
-  position: relative;
-}
-
-.section-title .accent::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--accent-color);
-  box-shadow: 0 0 10px var(--accent-color);
-}
-
-.hero-description {
-  font-size: 1.3rem;
-  max-width: 700px;
-  margin: 2rem auto;
-  color: var(--text-secondary);
-}
-
-.terminal-text {
-  font-family: 'Fira Code', monospace;
-  font-size: 1.2rem;
-  color: var(--primary-color);
-  margin: 1rem 0;
-  display: inline-block;
-  position: relative;
-  padding: 0.5rem 1rem;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-}
-
-.terminal-text::before {
-  content: attr(data-content);
-  position: relative;
-}
-
-.terminal-text .cursor {
-  display: inline-block;
-  width: 10px;
-  height: 20px;
-  background-color: var(--accent-color);
-  animation: cursorBlink 1s infinite;
-  vertical-align: middle;
-  margin-left: 5px;
-}
-
-@keyframes cursorBlink {
-  0%, 49% {
-    opacity: 1;
-  }
-  50%, 100% {
-    opacity: 0;
-  }
-}
-
-.scanning-effect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, 
-    rgba(0, 180, 250, 0) 0%,
-    rgba(0, 220, 250, 0.1) 50%,
-    rgba(0, 180, 250, 0) 100%);
-  animation: scanEffect 4s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes scanEffect {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.primary-button, .secondary-button {
-  font-family: 'Fira Code', monospace;
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.primary-button {
-  background-color: var(--button-bg);
-  color: var(--accent-color);
-  border: 1px solid var(--border-color);
-}
-
-.secondary-button {
-  background-color: transparent;
-  color: var(--accent-color);
-  border: 1px solid var(--border-color);
-}
-
-.primary-button:hover, .secondary-button:hover {
-  background-color: var(--button-bg-hover);
-  box-shadow: 0 0 15px var(--border-glow);
-  transform: translateY(-2px);
-}
-
-.primary-button::before, .secondary-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: 0.5s;
-}
-
-.primary-button:hover::before, .secondary-button:hover::before {
-  left: 100%;
-}
-
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  margin-top: 3rem;
-  padding: 1.5rem;
-  border-radius: 8px;
-  position: relative;
-}
-
-.dynamic-border {
-  position: relative;
-}
-
-.dynamic-border::before {
-  content: '';
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  background-color: transparent;
-  z-index: -1;
-  animation: borderPulse 3s infinite;
-}
-
-@keyframes borderPulse {
-  0%, 100% {
-    box-shadow: 0 0 5px var(--border-glow);
-  }
-  50% {
-    box-shadow: 0 0 20px var(--border-glow);
-  }
-}
-
-.stat {
+  bottom: -100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: binaryDrop linear infinite;
 }
 
-.stat-value {
+.binary-bit {
+  color: var(--matrix-green);
   font-family: 'Fira Code', monospace;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
+  font-size: 14px;
+  text-shadow: 0 0 5px var(--matrix-green);
+  transform: translateZ(0);
 }
 
-.stat-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* 动画类 */
-.animated {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
+@keyframes binaryDrop {
+  0% {
     transform: translateY(0);
   }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .hero-section .container {
-    padding: 0 1rem;
-  }
-  
-  .section-title {
-    font-size: 2.2rem;
-  }
-  
-  .hero-description {
-    font-size: 1.1rem;
-  }
-  
-  .hero-stats {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .main-nav {
-    display: none;
-  }
-  
-  .mobile-menu-toggle {
-    display: block;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .section-title {
-    font-size: 2.5rem;
-  }
-}
-
-/* 网络安全视觉元素 */
-/* 数字雨效果 */
-.matrix-rain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.5;
-}
-
-/* 扫描线效果 */
-.scan-line {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: rgba(0, 204, 255, 0.1);
-  box-shadow: 0 0 12px rgba(0, 204, 255, 0.5);
-  z-index: 100;
-  pointer-events: none;
-  animation: scanLine 8s linear infinite;
-}
-
-@keyframes scanLine {
-  0% {
-    top: 0%;
-  }
   100% {
-    top: 100%;
+    transform: translateY(-200%);
   }
 }
 
-/* 网格背景 */
-.cyber-lines {
+/* 十六进制数据显示 */
+.hex-display {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(rgba(0, 204, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 204, 255, 0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
+  top: 10px;
+  right: 10px;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: var(--matrix-green);
+  opacity: 0.7;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  border: 1px solid rgba(65, 255, 138, 0.3);
   pointer-events: none;
-  z-index: -2;
-}
-
-/* 粒子容器 */
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -3;
-  pointer-events: none;
-}
-
-/* 增强黑客风格的UI元素 */
-.cybersecurity-title {
-  font-family: 'Orbitron', 'Courier New', monospace;
-  text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
-  letter-spacing: 2px;
-}
-
-.cyber-box {
-  border: 1px solid rgba(0, 204, 255, 0.3);
-  background: rgba(0, 20, 40, 0.5);
-  box-shadow: 0 0 20px rgba(0, 204, 255, 0.2);
-  backdrop-filter: blur(5px);
-  position: relative;
+  z-index: 1000;
+  text-shadow: 0 0 5px var(--matrix-green);
   overflow: hidden;
+  white-space: nowrap;
+  animation: typeHex 5s steps(60) infinite;
 }
 
-.cyber-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.8), transparent);
-  animation: cyberScan 3s linear infinite;
-}
-
-@keyframes cyberScan {
-  0% {
-    left: -100%;
+@keyframes typeHex {
+  0%, 100% {
+    width: 0;
   }
   50% {
-    left: 100%;
-  }
-  100% {
-    left: 100%;
+    width: 250px;
   }
 }
 
-/* 增强按钮样式 */
-.cyber-button {
-  background-color: transparent;
-  color: var(--text-color);
-  border: 1px solid rgba(0, 204, 255, 0.5);
-  position: relative;
+/* 入侵警告闪烁效果 */
+.intrusion-warning {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Fira Code', monospace;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--accent-red);
+  text-shadow: 0 0 10px var(--accent-red);
+  opacity: 0;
+  z-index: 1000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  pointer-events: none;
+  animation: intrusionBlink 5s ease-in-out infinite;
+}
+
+@keyframes intrusionBlink {
+  0%, 100% {
+    opacity: 0;
+  }
+  10%, 12% {
+    opacity: 0.8;
+  }
+  11%, 13% {
+    opacity: 0;
+  }
+  14%, 16% {
+    opacity: 0.8;
+  }
+  15%, 17% {
+    opacity: 0;
+  }
+  18%, 30% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 加密解密视觉效果 */
+.encryption-effect {
   overflow: hidden;
-  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.encryption-effect::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-dark);
+  color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: encrypt 4s steps(30) forwards;
   z-index: 1;
 }
 
-.cyber-button:hover {
-  color: #000;
-  box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+@keyframes encrypt {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
 }
 
-.cyber-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 204, 255, 0.7);
-  transition: all 0.3s ease;
-  z-index: -1;
+/* 端口扫描视觉效果 */
+.port-scan {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: var(--primary-green);
+  opacity: 0.7;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  border: 1px solid rgba(65, 255, 138, 0.3);
+  pointer-events: none;
+  z-index: 1000;
+  max-width: 300px;
+  overflow: hidden;
+  animation: portScan 15s steps(60) infinite;
 }
 
-.cyber-button:hover::before {
-  left: 0;
-}
-
-/* 适应深色主题 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #0c0e14;
-    --text-color: #e5e5e5;
-    --primary-color: #0cf;
-    --secondary-color: #41ff8a;
+@keyframes portScan {
+  0% {
+    height: 20px;
   }
-  
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
+  10% {
+    height: 80px;
   }
-  
-  .matrix-rain {
-    opacity: 0.7;
+  90% {
+    height: 80px;
   }
-  
-  .cyber-lines {
-    opacity: 0.7;
+  100% {
+    height: 20px;
   }
 }
 
