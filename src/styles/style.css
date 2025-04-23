@@ -2007,6 +2007,9 @@ h2.section-title, h3.feature-title {
   overflow: hidden;
   position: relative;
   display: inline-block;
+  z-index: 5; /* 提高主文本层级 */
+  color: var(--primary-green); /* 确保文本颜色可见 */
+  text-shadow: 0 0 5px rgba(65, 255, 138, 0.5); /* 添加文字发光效果 */
 }
 
 .encryption-effect::before {
@@ -2021,8 +2024,9 @@ h2.section-title, h3.feature-title {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: encrypt 4s steps(30) forwards;
-  z-index: 1;
+  animation: encrypt 2s steps(30) forwards; /* 缩短动画时间 */
+  z-index: 6; /* 确保遮罩层在文本上方 */
+  text-align: center; /* 确保文本居中对齐 */
 }
 
 @keyframes encrypt {
@@ -2177,6 +2181,23 @@ main {
   text-shadow: 0 0 10px rgba(65, 255, 138, 0.5);
 }
 
+/* 添加hero-description样式 */
+.hero-description {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  max-width: 700px;
+  color: var(--primary-green);
+  text-shadow: 0 0 8px rgba(65, 255, 138, 0.5);
+  position: relative;
+  z-index: 5;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 10, 15, 0.3); /* 添加半透明背景增加可读性 */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(65, 255, 138, 0.2);
+  font-weight: 500; /* 略微加粗字体 */
+  letter-spacing: 0.5px; /* 增加字间距 */
+}
+
 /* 调整二进制流样式，确保它们正确显示 */
 .binary-stream {
   position: fixed;
@@ -2247,6 +2268,18 @@ main {
   
   .hero-section .section-title {
     font-size: 1.8rem;
+  }
+  
+  /* 添加hero-description在移动设备上的样式 */
+  .hero-description {
+    font-size: 1rem;
+    padding: 0.5rem;
+    max-width: 95%;
+  }
+  
+  /* 确保encryption-effect在移动设备上正确显示 */
+  .encryption-effect::before {
+    animation: encrypt 1.5s steps(20) forwards; /* 移动设备上进一步加快动画 */
   }
 }
 
