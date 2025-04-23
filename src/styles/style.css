@@ -2004,12 +2004,13 @@ h2.section-title, h3.feature-title {
 
 /* 加密解密视觉效果 */
 .encryption-effect {
-  overflow: hidden;
+  overflow: visible; /* 修改为visible，确保文本不被截断 */
   position: relative;
   display: inline-block;
   z-index: 5; /* 提高主文本层级 */
   color: var(--primary-green); /* 确保文本颜色可见 */
-  text-shadow: 0 0 5px rgba(65, 255, 138, 0.5); /* 添加文字发光效果 */
+  text-shadow: 0 0 8px rgba(65, 255, 138, 0.5); /* 添加文字发光效果 */
+  white-space: nowrap; /* 防止文本换行 */
 }
 
 .encryption-effect::before {
@@ -2017,6 +2018,7 @@ h2.section-title, h3.feature-title {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   background-color: var(--primary-dark);
@@ -2027,6 +2029,7 @@ h2.section-title, h3.feature-title {
   animation: encrypt 2s steps(30) forwards; /* 缩短动画时间 */
   z-index: 6; /* 确保遮罩层在文本上方 */
   text-align: center; /* 确保文本居中对齐 */
+  white-space: nowrap; /* 防止遮罩文本换行 */
 }
 
 @keyframes encrypt {
@@ -2196,6 +2199,10 @@ main {
   box-shadow: 0 0 10px rgba(65, 255, 138, 0.2);
   font-weight: 500; /* 略微加粗字体 */
   letter-spacing: 0.5px; /* 增加字间距 */
+  white-space: nowrap; /* 防止文本换行 */
+  overflow: visible; /* 确保文本不被截断 */
+  width: auto; /* 自动宽度适应内容 */
+  display: inline-block; /* 内联块级显示 */
 }
 
 /* 调整二进制流样式，确保它们正确显示 */
@@ -2437,5 +2444,37 @@ main {
     font-size: 13px;
     padding: 10px;
   }
+}
+
+/* 添加hero-description-container样式 */
+.hero-description-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+/* 添加hero-description样式 */
+.hero-description {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  max-width: 700px;
+  color: var(--primary-green);
+  text-shadow: 0 0 8px rgba(65, 255, 138, 0.5);
+  position: relative;
+  z-index: 5;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 10, 15, 0.3); /* 添加半透明背景增加可读性 */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(65, 255, 138, 0.2);
+  font-weight: 500; /* 略微加粗字体 */
+  letter-spacing: 0.5px; /* 增加字间距 */
+  white-space: nowrap; /* 防止文本换行 */
+  overflow: visible; /* 确保文本不被截断 */
+  width: auto; /* 自动宽度适应内容 */
+  display: inline-block; /* 内联块级显示 */
 }
 
