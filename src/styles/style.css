@@ -1118,11 +1118,12 @@ main {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
+  height: auto;
+  padding: 80px 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 .hero-buttons {
@@ -1704,20 +1705,12 @@ footer {
   
   .hero-description {
     font-size: 1rem;
-    padding: 0.8rem 1.2rem;
-    max-width: 90%;
+    padding: 0.6rem 1rem;
+    max-width: 85%;
     white-space: normal;
     letter-spacing: normal;
     line-height: 1.4;
-    background-color: rgba(0, 10, 15, 0.8);
-    border: 1px solid rgba(65, 255, 138, 0.6);
-    border-radius: 8px;
-  }
-  
-  .terminal-text {
-    padding: 10px;
-    font-size: 12px;
-    max-width: 90%;
+    margin-top: 0.5rem;
   }
   
   .hero-buttons {
@@ -1782,14 +1775,14 @@ footer {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 /* 添加hero-description-container样式 */
@@ -1808,41 +1801,28 @@ footer {
 /* 添加hero-description样式 */
 .hero-description {
   font-size: 1.2rem;
-  margin: 0;
-  max-width: 700px;
-  color: var(--primary-green);
-  text-shadow: 0 0 8px rgba(65, 255, 138, 0.8);
-  position: relative;
-  z-index: 5;
-  padding: 1rem 2rem;
-  background-color: rgba(0, 10, 15, 0.8);
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(65, 255, 138, 0.5);
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  padding: 0.6rem 1rem;
+  max-width: 85%;
   white-space: normal;
-  overflow: visible;
-  width: auto;
-  display: inline-block;
-  animation: heroTextFadeIn 1.5s ease-out forwards;
-  opacity: 0;
-  transform: translateY(10px);
-  border: 2px solid rgba(65, 255, 138, 0.6);
+  letter-spacing: normal;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+  background-color: rgba(0, 10, 15, 0.8);
+  border: 1px solid rgba(65, 255, 138, 0.6);
+  border-radius: 8px;
+  color: rgb(65, 255, 138);
+  text-shadow: 0 0 5px rgba(65, 255, 138, 0.7);
+  animation: heroTextFadeIn 1.5s ease-in-out forwards;
 }
 
 @keyframes heroTextFadeIn {
   0% {
     opacity: 0;
-    transform: translateY(10px) scale(0.95);
-    box-shadow: 0 0 5px rgba(65, 255, 138, 0.3);
-  }
-  70% {
-    transform: translateY(0) scale(1.02);
+    transform: translateY(10px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    box-shadow: 0 0 20px rgba(65, 255, 138, 0.5);
+    transform: translateY(0);
   }
 }
 
@@ -1879,3 +1859,206 @@ footer {
   }
 }
 
+/* 修复导航菜单居中问题 */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background-color: rgba(12, 14, 20, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(65, 255, 138, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.logo-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-green);
+  letter-spacing: 1px;
+}
+
+.logo-icon {
+  margin-left: 0.5rem;
+  opacity: 0.8;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.nav-button {
+  font-size: 1rem;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.nav-button:hover, .nav-button.active {
+  color: var(--primary-green);
+}
+
+.nav-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-green);
+  transition: width 0.3s ease;
+}
+
+.nav-button:hover::after, .nav-button.active::after {
+  width: 100%;
+}
+
+/* 移动菜单优化 */
+.mobile-menu-toggle {
+  display: none;
+  cursor: pointer;
+  color: var(--primary-green);
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--primary-green);
+  border-radius: 4px;
+}
+
+/* 移动设备适配优化 */
+@media (max-width: 768px) {
+  header {
+    padding: 0.8rem 1rem;
+  }
+
+  .main-nav {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(12, 14, 20, 0.95);
+    flex-direction: column;
+    padding: 1rem 0;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--primary-green);
+  }
+  
+  .main-nav.active {
+    display: flex;
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .hero-section {
+    padding-top: 60px;
+  }
+  
+  /* 调整矩阵动画透明度，使文本更清晰 */
+  .matrix-rain, .binary-stream {
+    opacity: 0.3;
+  }
+  
+  /* 调整标题大小 */
+  .hero-section .section-title {
+    font-size: 1.8rem;
+  }
+  
+  /* 调整描述文本样式 */
+  .hero-description {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    max-width: 85%;
+    white-space: normal;
+    letter-spacing: normal;
+    line-height: 1.4;
+  }
+  
+  .hero-buttons {
+    gap: 0.8rem;
+  }
+  
+  .hero-stats {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+  
+  /* 调整容器间距 */
+  .container {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+  
+  /* 调整终端文本区域 */
+  .terminal-text {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+  
+  /* 返回顶部按钮 */
+  .back-to-top {
+    right: 15px;
+    bottom: 15px;
+  }
+}
+
+/* 移动端样式适配 */
+@media screen and (max-width: 768px) {
+  /* 调整矩阵动画透明度，使文本更清晰 */
+  .matrix-rain, .binary-stream {
+    opacity: 0.3;
+  }
+  
+  /* 调整标题大小 */
+  .hero-section .section-title {
+    font-size: 1.8rem;
+  }
+  
+  /* 调整描述文本样式 */
+  .hero-description {
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    max-width: 85%;
+    white-space: normal;
+    letter-spacing: normal;
+    line-height: 1.4;
+  }
+  
+  /* 调整容器间距 */
+  .container {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+  
+  /* 调整终端文本区域 */
+  .terminal-text {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+  
+  /* 返回顶部按钮 */
+  .back-to-top {
+    right: 15px;
+    bottom: 15px;
+  }
+}
+
+
+rewritten_file>
