@@ -1666,7 +1666,7 @@ footer {
     font-size: 1.8rem;
   }
   
-  /* 添加hero-description在移动设备上的样式 */
+  /* 移动设备上的hero-description样式 */
   .hero-description {
     font-size: 1rem;
     padding: 0.6rem 1rem;
@@ -1674,150 +1674,10 @@ footer {
     white-space: normal; /* 允许在移动端换行显示 */
     letter-spacing: normal;
     line-height: 1.4;
-  }
-}
-
-@media (max-width: 768px) {
-  header {
-    padding: 0.25rem;
-    justify-content: flex-start;
-  }
-  
-  .mobile-menu-toggle {
-    display: flex;
-  }
-  
-  .logo {
-    margin-left: 10px;
-  }
-  
-  .main-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 15, 20, 0.95);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    transform: translateY(-100%);
-    transition: transform 0.4s ease;
-    padding: 1rem;
-    backdrop-filter: blur(10px);
-  }
-  
-  .main-nav.show {
-    transform: translateY(0);
-  }
-  
-  .nav-button {
-    width: 80%;
-    max-width: 300px;
-    padding: 0.8rem 1rem;
-    margin: 0.3rem 0;
-    font-size: 1rem;
-  }
-  
-  /* 汉堡菜单动画 */
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
-  
-  /* 优化终端显示 */
-  .terminal-container {
-    width: 95%;
-  }
-  
-  .terminal-text {
-    font-size: 12px;
-    padding: 10px;
-  }
-  
-  /* 优化矩阵雨效果在移动端的显示 */
-  .matrix-rain, .binary-stream {
-    opacity: 0.4; /* 降低移动设备上的不透明度以提高文本可读性 */
-  }
-}
-
-/* 修复标签容器的位置 */
-.site-tag-container {
-  width: 80%;
-  max-width: 700px;
-  margin: 30px auto;
-  text-align: center;
-  z-index: 20;
-  position: relative;
-}
-
-.site-tag {
-  margin: 0;
-  padding: 15px;
-  background-color: rgba(0, 10, 15, 0.8);
-  color: var(--primary-green);
-  font-family: 'Fira Code', monospace;
-  font-size: 16px;
-  line-height: 1.5;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 200, 120, 0.3);
-  display: block;
-  box-shadow: 0 0 20px rgba(0, 255, 120, 0.2);
-  text-align: center;
-  width: 100%;
-  animation: fadeIn 0.8s ease-out;
-}
-
-/* 文字淡入动画 */
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(-5px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* 确保二进制流背景效果保持在页面上 */
-.binary-stream {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  overflow: hidden;
-  opacity: 0.4; 
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
-
-/* 当页面滚动超过首屏高度时隐藏 */
-.binary-stream.hidden {
-  opacity: 0;
-}
-
-/* 删除可能干扰的扫描效果 */
-.scanning-effect, .cyber-lines, .cyber-grid, .scan-line {
-  display: none !important;
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-  .site-tag-container {
-    width: 90%;
-    margin: 25px auto;
-  }
-  
-  .site-tag {
-    font-size: 14px;
-    padding: 12px;
+    background-color: rgba(0, 10, 15, 0.8); /* 加深背景色提高可读性 */
+    border: 1px solid rgba(65, 255, 138, 0.6); /* 增强边框可见性 */
+    box-shadow: 0 0 20px rgba(65, 255, 138, 0.5); /* 增强阴影效果 */
+    text-shadow: 0 0 10px rgba(65, 255, 138, 0.9); /* 增强文字阴影 */
   }
 }
 
@@ -1839,9 +1699,11 @@ footer {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   padding: 0 1rem;
   text-align: center;
+  position: relative;
+  z-index: 10; /* 提高z-index以确保容器在其他元素之上 */
 }
 
 /* 添加hero-description样式 */
@@ -1850,23 +1712,23 @@ footer {
   margin: 1rem 0;
   max-width: 700px;
   color: var(--primary-green);
-  text-shadow: 0 0 8px rgba(65, 255, 138, 0.5);
+  text-shadow: 0 0 8px rgba(65, 255, 138, 0.8);
   position: relative;
   z-index: 5;
   padding: 0.8rem 1.5rem;
-  background-color: rgba(0, 10, 15, 0.3); /* 添加半透明背景增加可读性 */
+  background-color: rgba(0, 10, 15, 0.7); /* 加深背景色提高可读性 */
   border-radius: 5px;
-  box-shadow: 0 0 15px rgba(65, 255, 138, 0.3);
-  font-weight: 500; /* 略微加粗字体 */
+  box-shadow: 0 0 15px rgba(65, 255, 138, 0.5);
+  font-weight: 600; /* 加粗字体 */
   letter-spacing: 0.5px; /* 增加字间距 */
-  white-space: nowrap; /* 防止文本换行 */
+  white-space: normal; /* 允许文本换行 */
   overflow: visible; /* 确保文本不被截断 */
   width: auto; /* 自动宽度适应内容 */
   display: inline-block; /* 内联块级显示 */
   animation: heroTextFadeIn 1.5s ease-out forwards;
   opacity: 0;
   transform: translateY(10px);
-  border: 1px solid rgba(65, 255, 138, 0.3);
+  border: 1px solid rgba(65, 255, 138, 0.5);
 }
 
 @keyframes heroTextFadeIn {
