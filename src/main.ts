@@ -282,14 +282,14 @@ const initParticles = (): void => {
     (window as any).particlesJS('particles-js', {
       particles: {
         number: {
-          value: 80,
+          value: 100,
           density: {
             enable: true,
-            value_area: 800
+            value_area: 1000
           }
         },
         color: {
-          value: '#0cf'
+          value: '#41ff8a'
         },
         shape: {
           type: 'circle',
@@ -299,44 +299,44 @@ const initParticles = (): void => {
           }
         },
         opacity: {
-          value: 0.5,
-          random: false,
+          value: 0.4,
+          random: true,
           anim: {
             enable: false,
-            speed: 1,
-            opacity_min: 0.1,
+            speed: 0.5,
+            opacity_min: 0.2,
             sync: false
           }
         },
         size: {
-          value: 3,
+          value: 2,
           random: true,
           anim: {
             enable: false,
-            speed: 40,
+            speed: 20,
             size_min: 0.1,
             sync: false
           }
         },
         line_linked: {
           enable: true,
-          distance: 150,
-          color: '#0cf',
-          opacity: 0.4,
+          distance: 180,
+          color: '#41ff8a',
+          opacity: 0.3,
           width: 1
         },
         move: {
           enable: true,
-          speed: 2,
+          speed: 0.8,
           direction: 'none',
-          random: false,
+          random: true,
           straight: false,
-          out_mode: 'out',
+          out_mode: 'bounce',
           bounce: false,
           attract: {
-            enable: false,
-            rotateX: 600,
-            rotateY: 1200
+            enable: true,
+            rotateX: 300,
+            rotateY: 600
           }
         }
       },
@@ -349,30 +349,30 @@ const initParticles = (): void => {
           },
           onclick: {
             enable: true,
-            mode: 'push'
+            mode: 'repulse'
           },
           resize: true
         },
         modes: {
           grab: {
-            distance: 140,
+            distance: 200,
             line_linked: {
-              opacity: 1
+              opacity: 0.5
             }
           },
           bubble: {
             distance: 400,
-            size: 40,
+            size: 4,
             duration: 2,
-            opacity: 8,
+            opacity: 0.8,
             speed: 3
           },
           repulse: {
-            distance: 200,
-            duration: 0.4
+            distance: 150,
+            duration: 1
           },
           push: {
-            particles_nb: 4
+            particles_nb: 3
           },
           remove: {
             particles_nb: 2
