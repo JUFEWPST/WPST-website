@@ -1500,20 +1500,48 @@ footer {
   position: relative;
   width: 100%;
   max-width: 600px;
-  margin: 0 0 1rem 0;
+  margin: 1.5rem 0;
   padding: 15px;
   background-color: rgba(0, 8, 12, 0.8);
-  color: var(--terminal-green);
+  color: var(--primary-green);
   font-family: 'Fira Code', monospace;
   font-size: 14px;
   line-height: 1.6;
-  border-radius: 3px;
-  border: none;
-  box-shadow: none;
+  border-radius: 5px;
+  border: 1px solid rgba(65, 255, 138, 0.3);
+  box-shadow: 0 0 10px rgba(65, 255, 138, 0.2);
   max-height: 300px;
   overflow-y: auto;
   z-index: 20;
   text-align: left;
+  backdrop-filter: blur(5px);
+}
+
+/* 修正光标样式 */
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background-color: var(--primary-green);
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+/* 添加终端提示符样式 */
+.terminal-prompt {
+  color: var(--primary-green);
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /* 确保终端内容可见且位置正确 */
