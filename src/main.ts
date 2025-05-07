@@ -1,7 +1,7 @@
 const sections = document.querySelectorAll('.section');
-const navLinks = document.querySelectorAll('.nav-menu .scroll-link');
+const navLinks = document.querySelectorAll('.nav-menu a');
 const navMenu = document.querySelector('.nav-menu');
-const mobileNavToggle = document.querySelector('.mobile-menu-toggle');
+const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
 const cyberButton = document.querySelector('.cyber-button#aboutButton');
 const servicesButton = document.querySelector('.cyber-button#servicesButton');
 const matrixCanvas = document.getElementById('matrixRain') as HTMLCanvasElement;
@@ -125,30 +125,22 @@ const handleScroll = (): void => {
 
 // Mobile menu toggle
 const setupMobileMenu = (): void => {
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  if (!mobileMenuToggle) return;
+  if (!mobileNavToggle || !navMenu) return;
   
-  mobileMenuToggle.addEventListener('click', () => {
-    const mainNav = document.querySelector('.main-nav');
-    if (mainNav) {
-      mainNav.classList.toggle('show');
-    }
-    mobileMenuToggle.classList.toggle('active');
+  mobileNavToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+    mobileNavToggle.classList.toggle('active');
   });
 };
 
 // 点击导航链接时关闭移动菜单
 const setupNavLinkClick = () => {
-  const navButtons = document.querySelectorAll('.nav-button');
-  navButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const mainNav = document.querySelector('.main-nav');
-      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-      
-      if (window.innerWidth <= 768 && mainNav && mainNav.classList.contains('show')) {
-        mainNav.classList.remove('show');
-        if (mobileMenuToggle) {
-          mobileMenuToggle.classList.remove('active');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768 && navMenu && navMenu.classList.contains('show')) {
+        navMenu.classList.remove('show');
+        if (mobileNavToggle) {
+          mobileNavToggle.classList.remove('active');
         }
       }
     });
@@ -418,9 +410,8 @@ window.addEventListener('resize', () => {
   handleScroll();
   
   // 在调整窗口大小时重新检查移动菜单
-  const mainNav = document.querySelector('.main-nav');
-  if (window.innerWidth > 768 && mainNav) {
-    mainNav.classList.remove('show');
+  if (window.innerWidth > 768 && navMenu) {
+    navMenu.classList.remove('show');
     if (mobileNavToggle) {
       mobileNavToggle.classList.remove('active');
     }
