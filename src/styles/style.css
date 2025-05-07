@@ -326,6 +326,7 @@ a {
   justify-content: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(65, 255, 138, 0.2);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .nav-menu li {
@@ -353,39 +354,39 @@ a {
 
 .nav-menu a {
   display: block;
-  padding: 0.5rem;
+  padding: 0.6rem 1.2rem;
   font-size: 0.9rem;
   position: relative;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .nav-menu a::before {
   content: '';
   position: absolute;
-  left: 0;
   bottom: -2px;
-  top: auto;
+  left: 50%;
   width: 0;
-  height: 1px;
+  height: 2px;
   background-color: var(--primary-green);
-  transform: none;
-  transition: width 0.3s ease;
-  box-shadow: 0 0 8px var(--primary-green);
-}
-
-.nav-menu a:hover {
-  color: var(--primary-green);
+  transform: translateX(-50%);
+  transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 0 10px rgba(65, 255, 138, 0.7);
 }
 
 .nav-menu a:hover::before,
 .nav-menu a.active::before {
-  width: 100%;
+  width: 80%;
+}
+
+.nav-menu a:hover {
+  color: var(--primary-green);
+  text-shadow: 0 0 8px rgba(65, 255, 138, 0.5);
 }
 
 .nav-menu a.active {
   color: var(--primary-green);
   font-weight: bold;
-  text-shadow: 0 0 5px rgba(65, 255, 138, 0.5);
+  text-shadow: 0 0 12px rgba(65, 255, 138, 0.6);
 }
 
 /* Section content */
@@ -412,12 +413,11 @@ a {
   font-size: 3.5rem;
   margin-bottom: 1.2rem;
   letter-spacing: 2px;
-  font-weight: 700;
-  background: linear-gradient(to right, #ffffff, var(--primary-green), #ffffff);
+  font-weight: 800;
+  background: linear-gradient(to right, #ffffff, var(--primary-green) 50%, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: none;
-  animation: titleGlow 3s infinite alternate;
+  animation: titleGlow 4s infinite alternate;
 }
 
 @keyframes titleGlow {
@@ -506,7 +506,7 @@ a {
   bottom: 2rem;
   font-size: 0.9rem;
   opacity: 0.7;
-  animation: bounce 2s infinite;
+  animation: bounce 3s infinite cubic-bezier(0.280, 0.840, 0.420, 1);
 }
 
 @keyframes bounce {
@@ -702,22 +702,46 @@ main {
   padding: 0.8rem 1.5rem;
   border-radius: 30px;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 4px 10px rgba(68, 220, 158, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.nav-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(68, 220, 158, 0.5);
-  background-color: #50e5a8;
+.nav-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(65, 255, 138, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
 }
 
-.nav-button:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 5px rgba(68, 220, 158, 0.3);
+.nav-button:hover::after {
+  animation: ripple-effect 1.2s ease-out;
+}
+
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
 }
 
 /* 详情按钮样式 */
@@ -779,28 +803,15 @@ main {
 
 /* 高级网络安全视觉效果 */
 .particles-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: -2;
-  pointer-events: none;
+  display: none;
 }
 
 #particles-js {
-  width: 100%;
-  height: 100%;
-  opacity: 0.7;
-  background-color: transparent;
+  display: none;
 }
 
-/* 调整粒子效果与其他背景元素的混合模式 */
 #particles-js canvas {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: screen;
+  display: none;
 }
 
 /* 波纹效果 */
@@ -924,21 +935,21 @@ main {
   opacity: 0.12;
 }
 
-/* 网络线条 */
+/* 网络线条 - 增强效果 */
 .cyber-lines {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -4;
+  z-index: -2;
   background-image: 
-    linear-gradient(0deg, transparent 24%, rgba(65, 255, 138, 0.03) 25%, rgba(65, 255, 138, 0.03) 26%, transparent 27%, transparent 74%, rgba(65, 255, 138, 0.03) 75%, rgba(65, 255, 138, 0.03) 76%, transparent 77%, transparent),
-    linear-gradient(90deg, transparent 24%, rgba(65, 255, 138, 0.03) 25%, rgba(65, 255, 138, 0.03) 26%, transparent 27%, transparent 74%, rgba(65, 255, 138, 0.03) 75%, rgba(65, 255, 138, 0.03) 76%, transparent 77%, transparent);
-  background-size: 50px 50px;
-  opacity: 0.5;
+    linear-gradient(0deg, transparent 24%, rgba(65, 255, 138, 0.05) 25%, rgba(65, 255, 138, 0.05) 26%, transparent 27%, transparent 74%, rgba(65, 255, 138, 0.05) 75%, rgba(65, 255, 138, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(65, 255, 138, 0.05) 25%, rgba(65, 255, 138, 0.05) 26%, transparent 27%, transparent 74%, rgba(65, 255, 138, 0.05) 75%, rgba(65, 255, 138, 0.05) 76%, transparent 77%, transparent);
+  background-size: 40px 40px;
+  opacity: 0.6;
   pointer-events: none;
-  animation: grid-move 80s linear infinite;
+  animation: grid-move 60s linear infinite;
 }
 
 @keyframes grid-move {
@@ -946,7 +957,7 @@ main {
     background-position: 0 0;
   }
   100% {
-    background-position: 50px 50px;
+    background-position: 40px 40px;
   }
 }
 
@@ -1152,17 +1163,46 @@ main {
   padding: 1rem 2rem;
   border-radius: 30px;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 4px 10px rgba(68, 220, 158, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.primary-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(68, 220, 158, 0.5);
-  background-color: #50e5a8;
+.primary-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(65, 255, 138, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.primary-button:hover::after {
+  animation: ripple-effect 1.2s ease-out;
+}
+
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
 }
 
 .secondary-button {
@@ -1172,18 +1212,32 @@ main {
   padding: 1rem 2rem;
   border-radius: 30px;
   font-weight: bold;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 0 0 1px var(--primary-green);
   border: 1px solid var(--primary-green);
+  position: relative;
+  overflow: hidden;
 }
 
-.secondary-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 0 2px var(--primary-green), 0 0 20px rgba(65, 255, 138, 0.4);
-  background-color: rgba(65, 255, 138, 0.1);
+.secondary-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(65, 255, 138, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.secondary-button:hover::after {
+  animation: ripple-effect 1.2s ease-out;
 }
 
 .hero-stats {
@@ -1605,21 +1659,7 @@ footer {
   opacity: 0.8;
 }
 
-/* 滚动提示增强 */
-.scroll-hint {
-  position: absolute;
-  bottom: 2rem;
-  font-size: 0.9rem;
-  opacity: 0.7;
-  animation: bounce 2s infinite;
-  font-family: var(--hacker-font);
-  background-color: rgba(12, 14, 20, 0.6);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  border: 1px solid rgba(65, 255, 138, 0.2);
-}
-
-/* 矩阵雨效果 */
+/* 矩阵雨效果 - 增强效果 */
 .matrix-rain {
   position: fixed;
   top: 0;
@@ -1628,17 +1668,18 @@ footer {
   height: 100%;
   pointer-events: none;
   z-index: -3;
-  opacity: 0.4;
+  opacity: 0.5;
   mix-blend-mode: screen;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.7s ease;
+  filter: blur(0.3px);
 }
 
-/* 当页面滚动超过首屏高度时隐藏 */
+/* 当页面滚动超过首屏高度时隐藏矩阵雨 */
 .matrix-rain.hidden {
   opacity: 0;
 }
 
-/* 二进制流效果控制 */
+/* 二进制流效果 - 增强效果 */
 .binary-stream {
   position: fixed;
   top: 0;
@@ -1647,12 +1688,12 @@ footer {
   bottom: 0;
   z-index: -3;
   overflow: hidden;
-  opacity: 0.25;
+  opacity: 0.4;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.7s ease;
 }
 
-/* 当页面滚动超过首屏高度时隐藏 */
+/* 当页面滚动超过首屏高度时隐藏二进制流效果 */
 .binary-stream.hidden {
   opacity: 0;
 }
@@ -1794,4 +1835,22 @@ footer {
     right: 15px;
     bottom: 15px;
   }
+}
+
+/* 页面切换动画 */
+main section {
+  transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1), 
+              transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* 英雄部分增强 */
+.hero-description {
+  backdrop-filter: blur(3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 20px rgba(65, 255, 138, 0.2);
+  border: 1px solid rgba(65, 255, 138, 0.3);
+  transition: all 0.4s ease;
+}
+
+.hero-description:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 30px rgba(65, 255, 138, 0.3);
 }
