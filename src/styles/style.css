@@ -92,7 +92,7 @@ body::after {
   }
 }
 
-/* 添加数据流效�?*/
+/* 添加数据流效果 */
 .data-stream {
   position: fixed;
   top: 0;
@@ -484,7 +484,7 @@ a {
   transition: stroke 0.3s ease;
 }
 
-/* 为方向分支页面添加特殊样�?*/
+/* 为方向分支页面添加特殊样式 */
 #directions .illustration svg {
   filter: drop-shadow(0 0 8px rgba(45, 41, 55, 0.8));
 }
@@ -682,7 +682,7 @@ footer p {
   }
 }
 
-/* 为主体内容添加上边距，避免被固定导航栏遮�?*/
+/* 为主体内容添加上边距，避免被固定导航栏遮挡 */
 main {
   padding-top: 3rem;
 }
@@ -900,7 +900,7 @@ main {
   }
 }
 
-/* 二进制背景覆�?*/
+/* 二进制背景覆盖 */
 .binary-overlay {
   position: absolute;
   top: 0;
@@ -1213,7 +1213,7 @@ main {
   opacity: 0.8;
 }
 
-/* 协会简介部�?*/
+/* 协会简介部分 */
 .about-container {
   display: flex;
   flex-direction: row;
@@ -1329,7 +1329,7 @@ main {
   line-height: 1.5;
 }
 
-/* 增强的页�?*/
+/* 增强的页面 */
 footer {
   background-color: rgba(8, 10, 15, 0.9);
   position: relative;
@@ -1387,7 +1387,7 @@ footer {
   gap: 1rem;
 }
 
-/* 响应式调�?*/
+/* 响应式调整 */
 @media (max-width: 992px) {
   .about-container {
     flex-direction: column;
@@ -1452,7 +1452,7 @@ footer {
   text-align: left;
 }
 
-/* 确保终端内容可见且位置正�?*/
+/* 确保终端内容可见且位置正确 */
 .terminal-content {
   padding: 5px 0;
 }
@@ -1468,7 +1468,7 @@ footer {
   word-break: break-word;
 }
 
-/* 添加滚动条样�?*/
+/* 添加滚动条样式 */
 .terminal-text::-webkit-scrollbar {
   width: 6px;
 }
@@ -1482,7 +1482,7 @@ footer {
   border-radius: 3px;
 }
 
-/* 增加终端标题栏的对比�?*/
+/* 增加终端标题栏的对比度 */
 .terminal-header {
   display: flex;
   align-items: center;
@@ -1494,7 +1494,7 @@ footer {
   border-radius: 3px 3px 0 0;
 }
 
-/* 确保输入提示符颜色正�?*/
+/* 确保输入提示符颜色正确 */
 .terminal-chevron {
   color: var(--primary-green);
   margin-right: 8px;
@@ -1516,12 +1516,12 @@ footer {
   overflow: hidden;
 }
 
-/* 删除任何可能干扰的扫描效�?*/
+/* 删除任何可能干扰的扫描效果 */
 .scanning-effect, .cyber-lines, .cyber-grid, .scan-line {
   display: none !important;
 }
 
-/* 为页面底部标签添加显示效�?*/
+/* 为页面底部标签添加显示效果 */
 .site-tag {
   margin: 0;
   padding: 8px 15px;
@@ -1561,7 +1561,7 @@ footer {
   }
 }
 
-/* 特性卡片发光效�?*/
+/* 特性卡片发光效果 */
 .feature-glow {
   position: absolute;
   top: 0;
@@ -1608,7 +1608,7 @@ footer {
   border: 1px solid rgba(65, 255, 138, 0.2);
 }
 
-/* 矩阵雨效�?*/
+/* 矩阵雨效果 */
 .matrix-rain {
   position: fixed;
   top: 0;
@@ -1682,12 +1682,12 @@ footer {
 }
 
 .back-to-top::before {
-  content: "�?;
+  content: "↑";
   font-family: Arial, sans-serif;
   font-weight: bold;
 }
 
-/* 响应式调�?*/
+/* 响应式调整 */
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
