@@ -92,7 +92,7 @@ body::after {
   }
 }
 
-/* 添加数据流效果 */
+/* 添加数据流效�?*/
 .data-stream {
   position: fixed;
   top: 0;
@@ -326,7 +326,6 @@ a {
   justify-content: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(65, 255, 138, 0.2);
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .nav-menu li {
@@ -354,39 +353,39 @@ a {
 
 .nav-menu a {
   display: block;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem;
   font-size: 0.9rem;
   position: relative;
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.3s ease;
 }
 
 .nav-menu a::before {
   content: '';
   position: absolute;
+  left: 0;
   bottom: -2px;
-  left: 50%;
+  top: auto;
   width: 0;
-  height: 2px;
+  height: 1px;
   background-color: var(--primary-green);
-  transform: translateX(-50%);
-  transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 0 10px rgba(65, 255, 138, 0.7);
-}
-
-.nav-menu a:hover::before,
-.nav-menu a.active::before {
-  width: 80%;
+  transform: none;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--primary-green);
 }
 
 .nav-menu a:hover {
   color: var(--primary-green);
-  text-shadow: 0 0 8px rgba(65, 255, 138, 0.5);
+}
+
+.nav-menu a:hover::before,
+.nav-menu a.active::before {
+  width: 100%;
 }
 
 .nav-menu a.active {
   color: var(--primary-green);
   font-weight: bold;
-  text-shadow: 0 0 12px rgba(65, 255, 138, 0.6);
+  text-shadow: 0 0 5px rgba(65, 255, 138, 0.5);
 }
 
 /* Section content */
@@ -413,11 +412,12 @@ a {
   font-size: 3.5rem;
   margin-bottom: 1.2rem;
   letter-spacing: 2px;
-  font-weight: 800;
-  background: linear-gradient(to right, #ffffff, var(--primary-green) 50%, #ffffff);
+  font-weight: 700;
+  background: linear-gradient(to right, #ffffff, var(--primary-green), #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: titleGlow 4s infinite alternate;
+  text-shadow: none;
+  animation: titleGlow 3s infinite alternate;
 }
 
 @keyframes titleGlow {
@@ -484,7 +484,7 @@ a {
   transition: stroke 0.3s ease;
 }
 
-/* 为方向分支页面添加特殊样式 */
+/* 为方向分支页面添加特殊样�?*/
 #directions .illustration svg {
   filter: drop-shadow(0 0 8px rgba(45, 41, 55, 0.8));
 }
@@ -506,7 +506,7 @@ a {
   bottom: 2rem;
   font-size: 0.9rem;
   opacity: 0.7;
-  animation: bounce 3s infinite cubic-bezier(0.280, 0.840, 0.420, 1);
+  animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
@@ -682,7 +682,7 @@ footer p {
   }
 }
 
-/* 为主体内容添加上边距，避免被固定导航栏遮挡 */
+/* 为主体内容添加上边距，避免被固定导航栏遮�?*/
 main {
   padding-top: 3rem;
 }
@@ -702,46 +702,22 @@ main {
   padding: 0.8rem 1.5rem;
   border-radius: 30px;
   font-weight: bold;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 4px 10px rgba(68, 220, 158, 0.3);
-  position: relative;
-  overflow: hidden;
 }
 
-.nav-button::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background: rgba(65, 255, 138, 0.5);
-  opacity: 0;
-  border-radius: 100%;
-  transform: scale(1, 1) translate(-50%);
-  transform-origin: 50% 50%;
+.nav-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(68, 220, 158, 0.5);
+  background-color: #50e5a8;
 }
 
-.nav-button:hover::after {
-  animation: ripple-effect 1.2s ease-out;
-}
-
-@keyframes ripple-effect {
-  0% {
-    transform: scale(0, 0);
-    opacity: 0.5;
-  }
-  20% {
-    transform: scale(25, 25);
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(40, 40);
-  }
+.nav-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(68, 220, 158, 0.3);
 }
 
 /* 详情按钮样式 */
@@ -803,15 +779,18 @@ main {
 
 /* 高级网络安全视觉效果 */
 .particles-container {
-  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
 }
 
 #particles-js {
-  display: none;
-}
-
-#particles-js canvas {
-  display: none;
+  width: 100%;
+  height: 100%;
 }
 
 /* 波纹效果 */
@@ -863,7 +842,7 @@ main {
   }
 }
 
-/* 安全效果 */
+/* 安全�?*/
 .security-circle {
   position: absolute;
   top: 50%;
@@ -921,7 +900,7 @@ main {
   }
 }
 
-/* 二进制背景覆盖 */
+/* 二进制背景覆�?*/
 .binary-overlay {
   position: absolute;
   top: 0;
@@ -935,7 +914,7 @@ main {
   opacity: 0.12;
 }
 
-/* 网络线条 - 增强效果 */
+/* 网络线条 */
 .cyber-lines {
   position: fixed;
   top: 0;
@@ -946,10 +925,10 @@ main {
   background-image: 
     linear-gradient(0deg, transparent 24%, rgba(65, 255, 138, 0.05) 25%, rgba(65, 255, 138, 0.05) 26%, transparent 27%, transparent 74%, rgba(65, 255, 138, 0.05) 75%, rgba(65, 255, 138, 0.05) 76%, transparent 77%, transparent),
     linear-gradient(90deg, transparent 24%, rgba(65, 255, 138, 0.05) 25%, rgba(65, 255, 138, 0.05) 26%, transparent 27%, transparent 74%, rgba(65, 255, 138, 0.05) 75%, rgba(65, 255, 138, 0.05) 76%, transparent 77%, transparent);
-  background-size: 40px 40px;
-  opacity: 0.6;
+  background-size: 50px 50px;
+  opacity: 0.8;
   pointer-events: none;
-  animation: grid-move 60s linear infinite;
+  animation: grid-move 50s linear infinite;
 }
 
 @keyframes grid-move {
@@ -957,7 +936,7 @@ main {
     background-position: 0 0;
   }
   100% {
-    background-position: 40px 40px;
+    background-position: 50px 50px;
   }
 }
 
@@ -1163,46 +1142,17 @@ main {
   padding: 1rem 2rem;
   border-radius: 30px;
   font-weight: bold;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 4px 10px rgba(68, 220, 158, 0.3);
-  position: relative;
-  overflow: hidden;
 }
 
-.primary-button::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background: rgba(65, 255, 138, 0.5);
-  opacity: 0;
-  border-radius: 100%;
-  transform: scale(1, 1) translate(-50%);
-  transform-origin: 50% 50%;
-}
-
-.primary-button:hover::after {
-  animation: ripple-effect 1.2s ease-out;
-}
-
-@keyframes ripple-effect {
-  0% {
-    transform: scale(0, 0);
-    opacity: 0.5;
-  }
-  20% {
-    transform: scale(25, 25);
-    opacity: 0.3;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(40, 40);
-  }
+.primary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(68, 220, 158, 0.5);
+  background-color: #50e5a8;
 }
 
 .secondary-button {
@@ -1212,32 +1162,18 @@ main {
   padding: 1rem 2rem;
   border-radius: 30px;
   font-weight: bold;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s ease;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 0 0 1px var(--primary-green);
   border: 1px solid var(--primary-green);
-  position: relative;
-  overflow: hidden;
 }
 
-.secondary-button::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background: rgba(65, 255, 138, 0.5);
-  opacity: 0;
-  border-radius: 100%;
-  transform: scale(1, 1) translate(-50%);
-  transform-origin: 50% 50%;
-}
-
-.secondary-button:hover::after {
-  animation: ripple-effect 1.2s ease-out;
+.secondary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 2px var(--primary-green), 0 0 20px rgba(65, 255, 138, 0.4);
+  background-color: rgba(65, 255, 138, 0.1);
 }
 
 .hero-stats {
@@ -1277,7 +1213,7 @@ main {
   opacity: 0.8;
 }
 
-/* 协会简介部分 */
+/* 协会简介部�?*/
 .about-container {
   display: flex;
   flex-direction: row;
@@ -1328,7 +1264,7 @@ main {
   opacity: 0.9;
 }
 
-/* 特色部分 */
+/* 特色�?*/
 .feature-boxes {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1393,7 +1329,7 @@ main {
   line-height: 1.5;
 }
 
-/* 增强的页面 */
+/* 增强的页�?*/
 footer {
   background-color: rgba(8, 10, 15, 0.9);
   position: relative;
@@ -1451,7 +1387,7 @@ footer {
   gap: 1rem;
 }
 
-/* 响应式调整 */
+/* 响应式调�?*/
 @media (max-width: 992px) {
   .about-container {
     flex-direction: column;
@@ -1500,51 +1436,23 @@ footer {
   position: relative;
   width: 100%;
   max-width: 600px;
-  margin: 1.5rem 0;
+  margin: 0 0 1rem 0;
   padding: 15px;
   background-color: rgba(0, 8, 12, 0.8);
-  color: var(--primary-green);
+  color: var(--terminal-green);
   font-family: 'Fira Code', monospace;
   font-size: 14px;
   line-height: 1.6;
-  border-radius: 5px;
-  border: 1px solid rgba(65, 255, 138, 0.3);
-  box-shadow: 0 0 10px rgba(65, 255, 138, 0.2);
+  border-radius: 3px;
+  border: none;
+  box-shadow: none;
   max-height: 300px;
   overflow-y: auto;
   z-index: 20;
   text-align: left;
-  backdrop-filter: blur(5px);
 }
 
-/* 修正光标样式 */
-.cursor {
-  display: inline-block;
-  width: 10px;
-  height: 20px;
-  background-color: var(--primary-green);
-  animation: blink 1s step-end infinite;
-  vertical-align: middle;
-  margin-left: 5px;
-}
-
-/* 添加终端提示符样式 */
-.terminal-prompt {
-  color: var(--primary-green);
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-/* 确保终端内容可见且位置正确 */
+/* 确保终端内容可见且位置正�?*/
 .terminal-content {
   padding: 5px 0;
 }
@@ -1560,7 +1468,7 @@ footer {
   word-break: break-word;
 }
 
-/* 添加滚动条样式 */
+/* 添加滚动条样�?*/
 .terminal-text::-webkit-scrollbar {
   width: 6px;
 }
@@ -1574,7 +1482,7 @@ footer {
   border-radius: 3px;
 }
 
-/* 增加终端标题栏的对比度 */
+/* 增加终端标题栏的对比�?*/
 .terminal-header {
   display: flex;
   align-items: center;
@@ -1586,7 +1494,7 @@ footer {
   border-radius: 3px 3px 0 0;
 }
 
-/* 确保输入提示符颜色正确 */
+/* 确保输入提示符颜色正�?*/
 .terminal-chevron {
   color: var(--primary-green);
   margin-right: 8px;
@@ -1608,12 +1516,12 @@ footer {
   overflow: hidden;
 }
 
-/* 删除任何可能干扰的扫描效果 */
+/* 删除任何可能干扰的扫描效�?*/
 .scanning-effect, .cyber-lines, .cyber-grid, .scan-line {
   display: none !important;
 }
 
-/* 为页面底部标签添加显示效果 */
+/* 为页面底部标签添加显示效�?*/
 .site-tag {
   margin: 0;
   padding: 8px 15px;
@@ -1653,7 +1561,7 @@ footer {
   }
 }
 
-/* 特性卡片发光效果 */
+/* 特性卡片发光效�?*/
 .feature-glow {
   position: absolute;
   top: 0;
@@ -1679,15 +1587,28 @@ footer {
   width: 100%;
   height: 100%;
   background-image: 
-    linear-gradient(0deg, rgba(65, 255, 138, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(65, 255, 138, 0.02) 1px, transparent 1px);
+    linear-gradient(0deg, rgba(65, 255, 138, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(65, 255, 138, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.8;
 }
 
-/* 矩阵雨效果 - 增强效果 */
+/* 滚动提示增强 */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  animation: bounce 2s infinite;
+  font-family: var(--hacker-font);
+  background-color: rgba(12, 14, 20, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(65, 255, 138, 0.2);
+}
+
+/* 矩阵雨效�?*/
 .matrix-rain {
   position: fixed;
   top: 0;
@@ -1695,33 +1616,32 @@ footer {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: -3;
+  z-index: -1;
   opacity: 0.5;
   mix-blend-mode: screen;
-  transition: opacity 0.7s ease;
-  filter: blur(0.3px);
+  transition: opacity 0.5s ease;
 }
 
-/* 当页面滚动超过首屏高度时隐藏矩阵雨 */
+/* 当页面滚动超过首屏高度时隐藏 */
 .matrix-rain.hidden {
   opacity: 0;
 }
 
-/* 二进制流效果 - 增强效果 */
+/* 二进制流效果控制 */
 .binary-stream {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -3;
+  z-index: -1;
   overflow: hidden;
-  opacity: 0.4;
+  opacity: 0.3;
   pointer-events: none;
-  transition: opacity 0.7s ease;
+  transition: opacity 0.5s ease;
 }
 
-/* 当页面滚动超过首屏高度时隐藏二进制流效果 */
+/* 当页面滚动超过首屏高度时隐藏 */
 .binary-stream.hidden {
   opacity: 0;
 }
@@ -1863,22 +1783,4 @@ footer {
     right: 15px;
     bottom: 15px;
   }
-}
-
-/* 页面切换动画 */
-main section {
-  transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1), 
-              transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* 英雄部分增强 */
-.hero-description {
-  backdrop-filter: blur(3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 20px rgba(65, 255, 138, 0.2);
-  border: 1px solid rgba(65, 255, 138, 0.3);
-  transition: all 0.4s ease;
-}
-
-.hero-description:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 30px rgba(65, 255, 138, 0.3);
 }

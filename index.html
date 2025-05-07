@@ -6,17 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>江西财经大学网安协会 | Jiangxi University of Finance and Economics Network Security Association</title>
   <link rel="stylesheet" href="./src/styles/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
   <meta name="description" content="江西财经大学网安协会官方网站 - 团队介绍、方向分支、历史荣誉、网络服务、历届成员">
   <link rel="icon" href="./assets/jxufe_logo.png" type="image/png">
 </head>
 
 <body>
   <div id="root">
-    <div class="particles-container">
-      <div id="particles-js"></div>
-    </div>
-    
     <div class="cyber-lines"></div>
+    <div class="data-stream"></div>
+    <div class="binary-stream"></div>
+    <canvas class="matrix-rain" id="matrixRain"></canvas>
+    <div class="scan-line"></div>
+    <div class="hex-display"></div>
+    <div class="port-scan"></div>
+    <div class="intrusion-warning"></div>
     
     <header>
       <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
@@ -26,59 +30,50 @@
       </button>
       <nav>
         <ul class="nav-menu">
-          <li><a href="index.html" class="active">首页</a></li>
-          <li><a href="#about" class="scroll-link">协会简介</a></li>
-          <li><a href="#team" class="scroll-link">团队介绍</a><a href="team.html" class="page-link" title="打开单独页面"><i class="icon">⊕</i></a></li>
-          <li><a href="#directions" class="scroll-link">方向分支</a><a href="directions.html" class="page-link" title="打开单独页面"><i class="icon">⊕</i></a></li>
-          <li><a href="#honors" class="scroll-link">历史荣誉</a><a href="honors.html" class="page-link" title="打开单独页面"><i class="icon">⊕</i></a></li>
-          <li><a href="#services" class="scroll-link">网络服务</a><a href="services.html" class="page-link" title="打开单独页面"><i class="icon">⊕</i></a></li>
-          <li><a href="#members" class="scroll-link">历届成员</a><a href="members.html" class="page-link" title="打开单独页面"><i class="icon">⊕</i></a></li>
+          <li><a href="#hero" class="active">首页</a></li>
+          <li><a href="#about">协会简介</a></li>
+          <li><a href="#team">团队介绍</a></li>
+          <li><a href="#directions">方向分支</a></li>
+          <li><a href="#honors">历史荣誉</a></li>
+          <li><a href="#services">网络服务</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <section id="intro" class="section hero-section">
-        <div class="security-circle"></div>
-        <div class="ripple-container">
-          <div class="ripple"></div>
-          <div class="ripple"></div>
-          <div class="ripple"></div>
-        </div>
-        <div class="binary-overlay"></div>
-        <div class="section-content">
-          <div class="logo">
-            <img src="./assets/jxufe_logo.png" alt="江西财经大学网安协会标志" class="original-logo glow-effect" />
-            <h1 class="cyber-glitch" data-text="网安协会">网安协会</h1>
+      <section id="hero" class="hero-section active">
+        <div class="scanning-effect"></div>
+        <div class="container">
+          <h1 class="section-title animated"><span class="glitch-text" data-text="江西财经大学">江西财经大学</span><span class="accent glitch-text" data-text="网络安全协会">网络安全协会</span></h1>
+          
+          <div class="hero-description-container">
+            <p class="hero-description">专注于网络安全教育、技术研究与实践的学生社团</p>
           </div>
-          <h2 class="section-description">学习 · 创新 · 安全</h2>
-          <div class="hero-buttons">
-            <div class="cyber-button-container">
-              <button class="cyber-button" id="aboutButton">
-                <span class="cyber-button-text">探索协会</span>
-              </button>
-            </div>
-            <div class="cyber-button-container">
-              <button class="cyber-button secondary-button" id="servicesButton">
-                <span class="cyber-button-text">了解服务</span>
-              </button>
-            </div>
+          
+          <div class="terminal-text">
+            <span class="terminal-prompt">$ </span>initiating_security_protocols...
+            <span class="cursor"></span>
           </div>
-          <div class="hero-stats">
-            <div class="stat-item">
-              <div class="stat-number">2024</div>
-              <div class="stat-label">成立年份</div>
+          
+          <div class="hero-buttons animated">
+            <a href="#about" class="primary-button" id="aboutButton">了解更多</a>
+            <a href="#services" class="secondary-button" id="servicesButton">特色服务</a>
+          </div>
+          
+          <div class="hero-stats animated dynamic-border pulse-glow">
+            <div class="stat">
+              <span class="stat-value" id="year-counter">5</span>
+              <span class="stat-label">年历史</span>
             </div>
-            <div class="stat-item">
-              <div class="stat-number">200+</div>
-              <div class="stat-label">培养人才</div>
+            <div class="stat">
+              <span class="stat-value" id="members-counter">500+</span>
+              <span class="stat-label">成员人数</span>
             </div>
-            <div class="stat-item">
-              <div class="stat-number">50+</div>
-              <div class="stat-label">获奖项目</div>
+            <div class="stat">
+              <span class="stat-value" id="awards-counter">50+</span>
+              <span class="stat-label">荣誉奖项</span>
             </div>
           </div>
-          <p class="scroll-hint">向下滚动以探索更多</p>
         </div>
       </section>
 
@@ -89,8 +84,15 @@
           <div class="about-container">
             <div class="about-image">
               <img src="./assets/jxufe_logo.png" alt="江西财经大学网安协会团队照片" class="about-photo" />
+              <div class="security-badge"></div>
             </div>
             <div class="about-text">
+              <div class="terminal-header">
+                <span class="term-dot red"></span>
+                <span class="term-dot yellow"></span>
+                <span class="term-dot green"></span>
+                <span class="term-title">about.sh</span>
+              </div>
               <p>江西财经大学网络安全协会（简称"网安协会"）成立于2024年，现任会长：谢智屹。网安协会是一个专注于网络安全技术研究、知识分享与实践的学生组织。作为校内领先的技术社团，我们致力于提高校园网络安全意识，培养网络安全人才，并为学生提供学习和实践的平台。</p>
               
               <p>协会拥有完善的组织架构和专业的技术分支，定期举办网络安全讲座、技能培训、CTF竞赛等活动，为成员提供全方位的成长支持。我们鼓励成员积极参与各类网络安全竞赛，实践所学知识，培养团队合作精神。</p>
@@ -103,21 +105,25 @@
               <div class="feature-icon">🔍</div>
               <h3 class="feature-title">技术研究</h3>
               <p class="feature-desc">深入研究网络安全前沿技术，掌握实用安全工具</p>
+              <div class="feature-glow"></div>
             </div>
             <div class="feature-box">
               <div class="feature-icon">🏆</div>
               <h3 class="feature-title">竞赛培训</h3>
               <p class="feature-desc">系统培训CTF技能，打造专业竞赛团队</p>
+              <div class="feature-glow"></div>
             </div>
             <div class="feature-box">
               <div class="feature-icon">🔄</div>
               <h3 class="feature-title">资源共享</h3>
               <p class="feature-desc">分享优质学习资源，促进交流与合作</p>
+              <div class="feature-glow"></div>
             </div>
             <div class="feature-box">
               <div class="feature-icon">🛡️</div>
               <h3 class="feature-title">安全服务</h3>
               <p class="feature-desc">提供校内安全咨询和技术支持服务</p>
+              <div class="feature-glow"></div>
             </div>
           </div>
         </div>
@@ -129,12 +135,13 @@
           <h2 class="section-title">团队介绍</h2>
           <div class="illustration">
             <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-              <path d="M150,125 C150,75 200,50 250,50 C300,50 350,75 350,125 C350,175 300,200 250,200 C200,200 150,175 150,125 Z" fill="none" stroke="#333" stroke-width="3"></path>
-              <circle cx="250" cy="100" r="30" fill="#333"></circle>
-              <path d="M200,150 L300,150" stroke="#333" stroke-width="3"></path>
-              <path d="M220,180 L280,180" stroke="#333" stroke-width="3"></path>
+              <path d="M150,125 C150,75 200,50 250,50 C300,50 350,75 350,125 C350,175 300,200 250,200 C200,200 150,175 150,125 Z" fill="none" stroke="#41ff8a" stroke-width="3"></path>
+              <circle cx="250" cy="100" r="30" fill="#41ff8a" fill-opacity="0.2" stroke="#41ff8a" stroke-width="2"></circle>
+              <path d="M200,150 L300,150" stroke="#41ff8a" stroke-width="3"></path>
+              <path d="M220,180 L280,180" stroke="#41ff8a" stroke-width="3"></path>
             </svg>
           </div>
+          <div class="terminal-text">$ ls -la /teams | grep security</div>
           <p class="section-description">
             网安协会设有主席团、技术部、宣传部、外联部等组织架构，拥有完善的管理制度和工作流程。团队成员来自不同学院和专业，共同构成了一个多元化、创新型的技术团队。
           </p>
@@ -148,12 +155,13 @@
           <h2 class="section-title">方向分支</h2>
           <div class="illustration">
             <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-              <rect x="100" y="100" width="300" height="100" rx="10" ry="10" fill="none" stroke="#333" stroke-width="3"></rect>
-              <line x1="250" y1="100" x2="250" y2="200" stroke="#333" stroke-width="3"></line>
-              <line x1="175" y1="100" x2="175" y2="200" stroke="#333" stroke-width="3"></line>
-              <line x1="325" y1="100" x2="325" y2="200" stroke="#333" stroke-width="3"></line>
+              <rect x="100" y="100" width="300" height="100" rx="10" ry="10" fill="none" stroke="#41ff8a" stroke-width="3"></rect>
+              <line x1="250" y1="100" x2="250" y2="200" stroke="#41ff8a" stroke-width="3"></line>
+              <line x1="175" y1="100" x2="175" y2="200" stroke="#41ff8a" stroke-width="3"></line>
+              <line x1="325" y1="100" x2="325" y2="200" stroke="#41ff8a" stroke-width="3"></line>
             </svg>
           </div>
+          <div class="terminal-text">$ cd /branches && ./show_all.sh</div>
           <p class="section-description">
             协会设有四个主要技术方向：Web安全、系统安全、移动安全和密码学。每个方向都有专业的学生导师带领团队成员深入学习和研究相关领域的知识和技术，开展项目实践和竞赛准备。
           </p>
@@ -167,10 +175,11 @@
           <h2 class="section-title">历史荣誉</h2>
           <div class="illustration">
             <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="250,50 280,150 380,150 300,210 330,300 250,250 170,300 200,210 120,150 220,150" fill="none" stroke="#fff" stroke-width="3"></polygon>
-              <circle cx="250" cy="150" r="50" fill="none" stroke="#fff" stroke-width="3"></circle>
+              <polygon points="250,50 280,150 380,150 300,210 330,300 250,250 170,300 200,210 120,150 220,150" fill="none" stroke="#41ff8a" stroke-width="3"></polygon>
+              <circle cx="250" cy="150" r="50" fill="none" stroke="#41ff8a" stroke-width="3"></circle>
             </svg>
           </div>
+          <div class="terminal-text">$ cat /achievements/history.log</div>
           <p class="section-description">
             协会成员在各类网络安全竞赛中取得了优异成绩，包括全国大学生信息安全竞赛、CTF比赛等。自成立以来，我们已获得国家级奖项20余项，省级奖项50余项，为学校赢得了荣誉。
           </p>
@@ -184,15 +193,16 @@
           <h2 class="section-title">网络服务</h2>
           <div class="illustration">
             <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-              <rect x="150" y="80" width="200" height="150" fill="none" stroke="#fff" stroke-width="3"></rect>
-              <rect x="170" y="110" width="160" height="90" fill="none" stroke="#fff" stroke-width="3"></rect>
-              <circle cx="250" cy="230" r="10" fill="#fff"></circle>
-              <line x1="150" y1="80" x2="170" y2="110" stroke="#fff" stroke-width="2"></line>
-              <line x1="350" y1="80" x2="330" y2="110" stroke="#fff" stroke-width="2"></line>
-              <line x1="150" y1="230" x2="170" y2="200" stroke="#fff" stroke-width="2"></line>
-              <line x1="350" y1="230" x2="330" y2="200" stroke="#fff" stroke-width="2"></line>
+              <rect x="150" y="80" width="200" height="150" fill="none" stroke="#41ff8a" stroke-width="3"></rect>
+              <rect x="170" y="110" width="160" height="90" fill="none" stroke="#41ff8a" stroke-width="3"></rect>
+              <circle cx="250" cy="230" r="10" fill="#41ff8a" fill-opacity="0.5"></circle>
+              <line x1="150" y1="80" x2="170" y2="110" stroke="#41ff8a" stroke-width="2"></line>
+              <line x1="350" y1="80" x2="330" y2="110" stroke="#41ff8a" stroke-width="2"></line>
+              <line x1="150" y1="230" x2="170" y2="200" stroke="#41ff8a" stroke-width="2"></line>
+              <line x1="350" y1="230" x2="330" y2="200" stroke="#41ff8a" stroke-width="2"></line>
             </svg>
           </div>
+          <div class="terminal-text">$ systemctl status security-services</div>
           <p class="section-description">
             协会为校内提供多种网络安全服务，包括校园网安全讲座、安全意识培训、个人设备安全检测和应用开发。我们还开发和维护了多个校内网络安全相关的平台和工具，为学校信息化建设做出贡献。
           </p>
@@ -206,14 +216,15 @@
           <h2 class="section-title">历届成员</h2>
           <div class="illustration">
             <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="170" cy="100" r="20" fill="none" stroke="#fff" stroke-width="2"></circle>
-              <circle cx="250" cy="100" r="20" fill="none" stroke="#fff" stroke-width="2"></circle>
-              <circle cx="330" cy="100" r="20" fill="none" stroke="#fff" stroke-width="2"></circle>
-              <circle cx="210" cy="160" r="20" fill="none" stroke="#fff" stroke-width="2"></circle>
-              <circle cx="290" cy="160" r="20" fill="none" stroke="#fff" stroke-width="2"></circle>
-              <circle cx="250" cy="220" r="20" fill="none" stroke="#fff" stroke-width="2"></circle>
+              <circle cx="170" cy="100" r="20" fill="none" stroke="#41ff8a" stroke-width="2"></circle>
+              <circle cx="250" cy="100" r="20" fill="none" stroke="#41ff8a" stroke-width="2"></circle>
+              <circle cx="330" cy="100" r="20" fill="none" stroke="#41ff8a" stroke-width="2"></circle>
+              <circle cx="210" cy="160" r="20" fill="none" stroke="#41ff8a" stroke-width="2"></circle>
+              <circle cx="290" cy="160" r="20" fill="none" stroke="#41ff8a" stroke-width="2"></circle>
+              <circle cx="250" cy="220" r="20" fill="none" stroke="#41ff8a" stroke-width="2"></circle>
             </svg>
           </div>
+          <div class="terminal-text">$ find /members -type f -name "*.profile" | sort</div>
           <p class="section-description">
             协会自成立以来，已培养了数百名优秀的网络安全人才。许多校友现已成为网络安全行业的专家和领军人物，在各大企业和机构担任重要职位，为国家网络安全事业做出了贡献。
           </p>
@@ -223,6 +234,7 @@
     </main>
 
     <footer>
+      <div class="cyber-grid"></div>
       <div class="footer-top">
         <div class="footer-col">
           <h3>关于我们</h3>
