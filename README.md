@@ -1,3 +1,5 @@
+# 本项目已停，请转到https://github.com/JUFEWPST/JXUFE-CSG-Website
+
 # 江西财经大学网安协会网站 🛡️
 这是江西财经大学网安协会的官方网站项目，使用现代化的 Web 技术栈构建，旨在打造一个美观、实用、易于维护的平台，展示协会风采。
 **技术栈:** HTML, CSS, TypeScript, Vite
